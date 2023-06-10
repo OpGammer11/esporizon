@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "968338018820",
+    "project_id": "esporizon",
+    "storage_bucket": "esporizon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968338018820:android:5528c669049eb98e4e5b51",
+        "android_client_info": {
+          "package_name": "com.esporizon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968338018820-r94b3dd6drhko1mgprq08ode3ttb0p2e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.esporizon",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "968338018820-n25d0d00dr8p8b27p6u5okqpinn046n6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFhvJg6n8Dfya7ZTkuam3Tvk2pr_WnLsU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968338018820-n25d0d00dr8p8b27p6u5okqpinn046n6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
