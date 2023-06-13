@@ -5,58 +5,33 @@
  * @format
  */
 
-import React from 'react';
+import {Image, StatusBar, useColorScheme} from 'react-native';
+import React, {useEffect} from 'react';
 import RNBootSplash from 'react-native-bootsplash';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import Appnavigator from './Appnavigation';
+import FastImage from 'react-native-fast-image';
 
-function App() {
-  React.useEffect(() => {
+export default function App() {
+  useEffect(() => {
     const init = async () => {
       // …do multiple sync or async tasks
     };
-
-    init().finally(async () => {
-      await RNBootSplash.hide({fade: true, duration: 300});
-      console.log('BootSplash has been hidden successfully');
+    init().finally(() => {
+      RNBootSplash.hide({fade: true});
     });
   }, []);
-
-  const isDarkMode = useColorScheme() === 'dark';
 
   return (
     <>
       <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        barStyle={'light-content'}
         translucent={true}
         backgroundColor={'transparent'}
       />
       <SafeAreaProvider>
-        <SafeAreaView>
-          <ScrollView contentInsetAdjustmentBehavior="automatic">
-            <View>
-              <Text style={styles.sectionTitle}>Step One</Text>
-            </View>
-          </ScrollView>
-        </SafeAreaView>
+        <Appnavigator />
       </SafeAreaProvider>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-});
-
-export default App;
