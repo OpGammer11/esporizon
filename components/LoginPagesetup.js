@@ -1,4 +1,13 @@
-import {Dimensions, StyleSheet, View, Image, ScrollView} from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+  View,
+  Image,
+  ScrollView,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
@@ -8,40 +17,55 @@ const {width, height} = Dimensions.get('window');
 export default function LoginPageSetup({children}) {
   return (
     <>
-      <View style={styles.imageContainer}>
-        <Image
+      <KeyboardAvoidingView behavior="padding" style={{flex: 1}}>
+        <View style={styles.imageContainer}>
+          <Image
+            style={{
+              width: '100%',
+              height: '100%',
+              resizeMode: 'cover',
+            }}
+            source={require('../assets/loginBgSimple.png')}
+          />
+        </View>
+        <SafeAreaView
           style={{
-            width: '100%',
-            height: '100%',
-            resizeMode: 'cover',
-          }}
-          source={require('../assets/loginBg.png')}
-        />
-      </View>
-      <SafeAreaView
-        style={{
-          flex: 1,
-          backgroundColor: 'transparent',
-        }}>
-        <LinearGradient
-          start={{x: 0, y: 1}}
-          end={{x: 0, y: 0}}
-          colors={['#000000', '#000', '#00000000']}
-          style={{flex: 1, justifyContent: 'flex-end'}}>
-          <View style={styles.mainContainer}>
-            <Text
-              style={{
-                fontSize: 40,
-                color: 'white',
-                marginBottom: 20,
-                fontFamily: 'Ubuntu-Bold',
-              }}>
-              Get Started
-            </Text>
-            {children}
+            flex: 1,
+            backgroundColor: 'transparent',
+          }}>
+          <View style={styles.logo} pointerEvents="none">
+            <Image
+              resizeMode="contain"
+              source={require('../assets/espologoglow.png')}
+              style={{width: '100%', height: '100%'}}
+            />
           </View>
-        </LinearGradient>
-      </SafeAreaView>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <LinearGradient
+              start={{x: 0, y: 1}}
+              end={{x: 0, y: 0}}
+              colors={['black', 'black', 'transparent']}
+              style={{flex: 1, justifyContent: 'flex-end'}}>
+              <LinearGradient
+                start={{x: 0, y: 1}}
+                end={{x: 0, y: 0}}
+                colors={['black', 'black', 'black', 'transparent']}
+                style={styles.mainContainer}>
+                <Text
+                  style={{
+                    fontSize: 40,
+                    color: 'white',
+                    marginBottom: 50,
+                    fontFamily: 'Ubuntu-Bold',
+                  }}>
+                  Get Started
+                </Text>
+                {children}
+              </LinearGradient>
+            </LinearGradient>
+          </TouchableWithoutFeedback>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     </>
   );
 }
@@ -60,5 +84,14 @@ const styles = StyleSheet.create({
     height: height / 1.8,
     paddingHorizontal: 20,
     paddingBottom: 20,
+    justifyContent: 'space-between',
+  },
+  logo: {
+    position: 'absolute',
+    top: 40,
+    right: 20,
+    width: 50,
+    height: 50,
+    zIndex: 1,
   },
 });
