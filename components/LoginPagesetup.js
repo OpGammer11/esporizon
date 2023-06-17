@@ -9,6 +9,7 @@ import {
   Keyboard,
 } from 'react-native';
 import React from 'react';
+import MyText from './MyText';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import {Text} from 'moti';
@@ -51,15 +52,14 @@ export default function LoginPageSetup({children}) {
                 end={{x: 0, y: 0}}
                 colors={['black', 'black', 'black', 'transparent']}
                 style={styles.mainContainer}>
-                <Text
+                <MyText
                   style={{
-                    fontSize: 40,
+                    fontSize: 60,
                     color: 'white',
-                    marginBottom: 50,
-                    fontFamily: 'Ubuntu-Bold',
+                    marginBottom: 40,
                   }}>
-                  Get Started
-                </Text>
+                  {`GET\nSTARTED`}
+                </MyText>
                 {children}
               </LinearGradient>
             </LinearGradient>
@@ -88,10 +88,11 @@ const styles = StyleSheet.create({
   },
   logo: {
     position: 'absolute',
-    top: 40,
-    right: 20,
-    width: 50,
-    height: 50,
+    top: -20,
+    right: -30,
+    width: 150,
+    height: 150,
+    // backgroundColor: 'red',
     zIndex: 1,
   },
 });

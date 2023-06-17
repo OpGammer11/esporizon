@@ -7,13 +7,21 @@ export default function MyText({children, ...props}) {
   return (
     <>
       {bold && italic ? (
-        <Text style={[styles.boldItalic, style]}>{children}</Text>
+        <Text {...props} style={[styles.boldItalic, style]}>
+          {children}
+        </Text>
       ) : bold ? (
-        <Text style={[styles.bold, style]}>{children}</Text>
+        <Text {...props} style={[styles.bold, style]}>
+          {children}
+        </Text>
       ) : italic ? (
-        <Text style={[styles.italic, style]}>{children}</Text>
+        <Text {...props} style={[styles.italic, style]}>
+          {children}
+        </Text>
       ) : (
-        <Text style={[styles.regular, style]}>{children}</Text>
+        <Text {...props} style={[styles.regular, style]}>
+          {children}
+        </Text>
       )}
     </>
   );
@@ -21,15 +29,15 @@ export default function MyText({children, ...props}) {
 
 const styles = StyleSheet.create({
   regular: {
-    fontFamily: 'Ubuntu-Regular',
+    fontFamily: 'UbuntuMono-Regular',
   },
   bold: {
-    fontFamily: 'Ubuntu-Bold',
+    fontFamily: 'UbuntuMono-Bold',
   },
   italic: {
-    fontFamily: 'Ubuntu-Italic',
+    fontFamily: 'UbuntuMono-Italic',
   },
   boldItalic: {
-    fontFamily: 'Ubuntu-BoldItalic',
+    fontFamily: 'UbuntuMono-BoldItalic',
   },
 });

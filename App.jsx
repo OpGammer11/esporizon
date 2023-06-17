@@ -11,27 +11,30 @@ import RNBootSplash from 'react-native-bootsplash';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Appnavigator from './Appnavigation';
 import FastImage from 'react-native-fast-image';
+import {RecoilRoot} from 'recoil';
 
 export default function App() {
   useEffect(() => {
     const init = async () => {
-      // …do multiple sync or async tasks
+      console.log('App is loading...');
     };
     init().finally(() => {
-      RNBootSplash.hide({fade: true});
+      RNBootSplash.hide({fade: true, duration: 250});
     });
   }, []);
 
   return (
     <>
-      <StatusBar
-        barStyle={'light-content'}
-        translucent={true}
-        backgroundColor={'transparent'}
-      />
-      <SafeAreaProvider>
-        <Appnavigator />
-      </SafeAreaProvider>
+      <RecoilRoot>
+        <StatusBar
+          barStyle={'light-content'}
+          translucent={true}
+          backgroundColor={'transparent'}
+        />
+        <SafeAreaProvider>
+          <Appnavigator />
+        </SafeAreaProvider>
+      </RecoilRoot>
     </>
   );
 }

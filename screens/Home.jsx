@@ -8,9 +8,10 @@ import {
   View,
   Dimensions,
 } from 'react-native';
-import {FlipInEasyX} from 'react-native-reanimated';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {SharedElement} from 'react-navigation-shared-element';
+import auth from '@react-native-firebase/auth';
+import MyText from '../components/MyText';
 
 export default function Home({navigation}) {
   const {width, height} = Dimensions.get('window');
@@ -23,7 +24,12 @@ export default function Home({navigation}) {
           flex: 1,
           paddingHorizontal: 20,
           backgroundColor: 'black',
-        }}></SafeAreaView>
+        }}>
+        <MyText style={{color: 'white'}}>Home</MyText>
+        <TouchableOpacity onPress={() => auth().signOut()}>
+          <MyText style={{color: 'white'}}>Logout</MyText>
+        </TouchableOpacity>
+      </SafeAreaView>
     </>
   );
 }
