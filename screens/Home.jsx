@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   ScrollView,
@@ -6,42 +6,201 @@ import {
   Text,
   TouchableOpacity,
   View,
+  TextInput,
   Dimensions,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {SharedElement} from 'react-navigation-shared-element';
+import {SvgUri} from 'react-native-svg';
 import auth from '@react-native-firebase/auth';
+import {useRecoilState} from 'recoil';
+import {FUserData, Name} from '../providers/recoilStore';
 import MyText from '../components/MyText';
+import firestore from '@react-native-firebase/firestore';
+import {Notification} from '../components/Svgicon';
+import {colors} from '../utils/colors';
+import {formatNumber} from '../utils/number';
 
 export default function Home({navigation}) {
   const {width, height} = Dimensions.get('window');
+  const [userData, setUserData] = useRecoilState(FUserData);
+  const {username, uid, mob} = userData || {username: '', uid: '', mob: ''};
 
-  const image = require('../assets/espologoglow.png');
+  useEffect(() => {
+    if (!auth().currentUser) {
+      return;
+    }
+
+    if (userData === null) {
+      getUserData();
+    } else if (userData.uid != auth().currentUser.uid) {
+      getUserData();
+      // console.log('user data updated');
+    } else {
+      // console.log('user data is already there');
+    }
+
+    function getUserData() {
+      const user = auth().currentUser;
+      if (user) {
+        firestore()
+          .collection('user')
+          .doc(user.uid)
+          .get()
+          .then(documentSnapshot => {
+            if (documentSnapshot.exists) {
+              setUserData(documentSnapshot.data());
+            }
+          });
+      }
+    }
+  }, []);
+
   return (
     <>
       <SafeAreaView
         style={{
           flex: 1,
           paddingHorizontal: 20,
-          backgroundColor: 'black',
+          backgroundColor: colors.background,
         }}>
-        <MyText style={{color: 'white'}}>Home</MyText>
-        <TouchableOpacity onPress={() => auth().signOut()}>
-          <MyText style={{color: 'white'}}>Logout</MyText>
-        </TouchableOpacity>
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Profile');
+            }}
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: 30,
+              borderColor: colors.secondryBg,
+              borderWidth: 2,
+              justifyContent: 'center',
+              alignItems: 'center',
+              overflow: 'hidden',
+
+              //shadow
+              shadowColor: colors.secondary,
+              shadowOffset: {
+                width: 0,
+                height: 30,
+              },
+              shadowOpacity: 0.5,
+              shadowRadius: 20,
+              elevation: 30,
+            }}>
+            <SvgUri
+              uri={`https://api.dicebear.com/6.x/adventurer-neutral/svg?seed=${username}&backgroundColor=ffdfbf`}
+              height={50}
+              width={50}
+            />
+          </TouchableOpacity>
+          <View
+            style={{
+              marginLeft: 20,
+              flexDirection: 'row',
+              alignItems: 'flex-end',
+              justifyContent: 'center',
+              // backgroundColor: 'white',
+            }}>
+            <MyText style={{fontSize: 32, color: 'grey'}}>Hello,</MyText>
+            <MyText
+              style={{
+                fontSize: 32,
+                color: colors.text,
+                marginLeft: 5,
+              }}>
+              {`${username.charAt(0).toUpperCase()}${username.slice(1)}`}!
+            </MyText>
+          </View>
+          <View
+            style={{
+              borderRadius: 20,
+              height: 50,
+              width: 50,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#2b2c28',
+              alignSelf: 'flex-end',
+              marginLeft: 'auto',
+
+              //shadow
+              shadowColor: colors.secondary,
+              shadowOffset: {
+                width: 10,
+                height: 0,
+              },
+              shadowOpacity: 0.58,
+              shadowRadius: 16.0,
+
+              elevation: 16,
+            }}>
+            <TouchableOpacity
+              onPress={() => {
+                // navigation.navigate('Notification');
+                auth().signOut();
+              }}>
+              <Notification size={32} accentColor={'grey'} />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.main}>
+          <View>
+            <MyText
+              style={{fontSize: 20, color: colors.text, marginBottom: 10}}>
+              // Your Earnings //
+            </MyText>
+            <View style={styles.earningsCard}>
+              <View style={styles.earningsCardHeader}>
+                <MyText josefin style={{fontSize: 35, color: colors.text}}>
+                  Total Earned
+                </MyText>
+                <MyText
+                  josefin
+                  italic
+                  style={{fontSize: 18, color: colors.primary}}>
+                  ₹ {formatNumber(userData?.totalEarned || 4600)}
+                </MyText>
+              </View>
+            </View>
+          </View>
+        </View>
       </SafeAreaView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  otherShape: {
-    width: 200,
-    height: 100,
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+    // backgroundColor: 'white',
+  },
+  main: {
+    flex: 1,
+    // backgroundColor: 'white',
+    marginTop: 40,
+  },
+  earningsCard: {
+    height: 250,
+    width: '100%',
+    borderRadius: 20,
+    backgroundColor: colors.background,
+    padding: 20,
+
+    //shadow
+    shadowColor: 'grey',
+    shadowOffset: {
+      width: 10,
+      height: 0,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 16.0,
+    elevation: 16,
+  },
+  earningsCardHeader: {
+    justifyContent: 'space-between',
     backgroundColor: 'transparent',
-    borderRightWidth: 100,
-    borderTopWidth: 100,
-    borderStyle: 'solid',
-    borderRightColor: 'white',
   },
 });

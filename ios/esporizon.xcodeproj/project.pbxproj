@@ -18,6 +18,12 @@
 		249293B59C7340F1A685CB45 /* UbuntuMono-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 579929BE32EC435394C2042C /* UbuntuMono-BoldItalic.ttf */; };
 		F6CB6A01E62749C1A442AA0C /* UbuntuMono-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50151F01963C4326AD69E8B1 /* UbuntuMono-Italic.ttf */; };
 		828E92FF1EE8473D980085B2 /* UbuntuMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4413EC0477C84BB5A356B0EF /* UbuntuMono-Regular.ttf */; };
+		7E4F2D7155F24A6F87F27E3D /* JosefinSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60F65E58A34542DBBDA46AED /* JosefinSans-Bold.ttf */; };
+		3C46AA5E1D5B4CE5A9F7428E /* JosefinSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04D653A9DCDA48A7AE51AEF6 /* JosefinSans-BoldItalic.ttf */; };
+		45F7C623D8824F71A2DDC27A /* JosefinSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E607454B7C7644098F089FE9 /* JosefinSans-Italic.ttf */; };
+		67D9A660B2B14A759689A03E /* JosefinSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC8A8CE78D324EE99A52DE38 /* JosefinSans-Medium.ttf */; };
+		DFBBCCADDEA246DEB5FFB7C8 /* JosefinSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 329CB5903E454C1A836079C9 /* JosefinSans-MediumItalic.ttf */; };
+		8D3289233931472B8997F417 /* JosefinSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBB3C6B303BF4C6B87AA7080 /* JosefinSans-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +58,12 @@
 		579929BE32EC435394C2042C /* UbuntuMono-BoldItalic.ttf */ = {isa = PBXFileReference; name = "UbuntuMono-BoldItalic.ttf"; path = "../assets/fonts/UbuntuMono-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		50151F01963C4326AD69E8B1 /* UbuntuMono-Italic.ttf */ = {isa = PBXFileReference; name = "UbuntuMono-Italic.ttf"; path = "../assets/fonts/UbuntuMono-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		4413EC0477C84BB5A356B0EF /* UbuntuMono-Regular.ttf */ = {isa = PBXFileReference; name = "UbuntuMono-Regular.ttf"; path = "../assets/fonts/UbuntuMono-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		60F65E58A34542DBBDA46AED /* JosefinSans-Bold.ttf */ = {isa = PBXFileReference; name = "JosefinSans-Bold.ttf"; path = "../assets/fonts/JosefinSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		04D653A9DCDA48A7AE51AEF6 /* JosefinSans-BoldItalic.ttf */ = {isa = PBXFileReference; name = "JosefinSans-BoldItalic.ttf"; path = "../assets/fonts/JosefinSans-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E607454B7C7644098F089FE9 /* JosefinSans-Italic.ttf */ = {isa = PBXFileReference; name = "JosefinSans-Italic.ttf"; path = "../assets/fonts/JosefinSans-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FC8A8CE78D324EE99A52DE38 /* JosefinSans-Medium.ttf */ = {isa = PBXFileReference; name = "JosefinSans-Medium.ttf"; path = "../assets/fonts/JosefinSans-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		329CB5903E454C1A836079C9 /* JosefinSans-MediumItalic.ttf */ = {isa = PBXFileReference; name = "JosefinSans-MediumItalic.ttf"; path = "../assets/fonts/JosefinSans-MediumItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FBB3C6B303BF4C6B87AA7080 /* JosefinSans-Regular.ttf */ = {isa = PBXFileReference; name = "JosefinSans-Regular.ttf"; path = "../assets/fonts/JosefinSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +176,12 @@
 				579929BE32EC435394C2042C /* UbuntuMono-BoldItalic.ttf */,
 				50151F01963C4326AD69E8B1 /* UbuntuMono-Italic.ttf */,
 				4413EC0477C84BB5A356B0EF /* UbuntuMono-Regular.ttf */,
+				60F65E58A34542DBBDA46AED /* JosefinSans-Bold.ttf */,
+				04D653A9DCDA48A7AE51AEF6 /* JosefinSans-BoldItalic.ttf */,
+				E607454B7C7644098F089FE9 /* JosefinSans-Italic.ttf */,
+				FC8A8CE78D324EE99A52DE38 /* JosefinSans-Medium.ttf */,
+				329CB5903E454C1A836079C9 /* JosefinSans-MediumItalic.ttf */,
+				FBB3C6B303BF4C6B87AA7080 /* JosefinSans-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -269,6 +287,12 @@
 				249293B59C7340F1A685CB45 /* UbuntuMono-BoldItalic.ttf in Resources */,
 				F6CB6A01E62749C1A442AA0C /* UbuntuMono-Italic.ttf in Resources */,
 				828E92FF1EE8473D980085B2 /* UbuntuMono-Regular.ttf in Resources */,
+				7E4F2D7155F24A6F87F27E3D /* JosefinSans-Bold.ttf in Resources */,
+				3C46AA5E1D5B4CE5A9F7428E /* JosefinSans-BoldItalic.ttf in Resources */,
+				45F7C623D8824F71A2DDC27A /* JosefinSans-Italic.ttf in Resources */,
+				67D9A660B2B14A759689A03E /* JosefinSans-Medium.ttf in Resources */,
+				DFBBCCADDEA246DEB5FFB7C8 /* JosefinSans-MediumItalic.ttf in Resources */,
+				8D3289233931472B8997F417 /* JosefinSans-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

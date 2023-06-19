@@ -79,7 +79,7 @@ export default function Otp({navigation, route}) {
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: 'black',
+        backgroundColor: colors.background,
         paddingHorizontal: 20,
       }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -110,6 +110,7 @@ export default function Otp({navigation, route}) {
               marginBottom: 40,
             }}>
             <MyText
+              josefin
               style={{
                 fontSize: 60,
                 color: 'white',
@@ -134,6 +135,7 @@ export default function Otp({navigation, route}) {
               borderRadius: 10,
               borderWidth: 4,
               color: 'white',
+              fontFamily: 'UbuntuMono-Regular',
             }}
             handleTextChange={handleChange}
             inputCount={6}
@@ -162,9 +164,9 @@ export default function Otp({navigation, route}) {
             <View
               style={[
                 styles.sendOtpBtn,
-                {backgroundColor: 'white', opacity: 0.1, width: 50},
+                {backgroundColor: colors.secondryBg, width: 50},
               ]}>
-              <Icon name="arrowright" size={30} color="white" />
+              <Icon name="arrowright" size={30} color="grey" />
             </View>
           )}
         </KeyboardAvoidingView>

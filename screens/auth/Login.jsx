@@ -383,7 +383,7 @@ export default function Login({navigation}) {
           <View
             style={[
               styles.sendOtpBtn,
-              {backgroundColor: 'white', opacity: 0.2, width: 50},
+              {backgroundColor: colors.secondryBg, width: 50},
             ]}>
             {/* <MyText
               style={{
@@ -392,7 +392,7 @@ export default function Login({navigation}) {
               }}>
               Get OTP{' '}
             </MyText> */}
-            <Icon name="arrowright" size={30} color="white" />
+            <Icon name="arrowright" size={30} color="grey" />
             {/* <ArrowRight size={35} accentColor="white" /> */}
           </View>
         )}

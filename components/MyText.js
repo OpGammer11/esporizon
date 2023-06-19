@@ -3,26 +3,48 @@ import React from 'react';
 
 export default function MyText({children, ...props}) {
   const {style} = props;
-  const {bold, italic} = props;
+  const {bold, italic, josefin, medium} = props;
+
+  const fontType = () => {
+    if (josefin) {
+      if (bold) {
+        return 'JosefinSans-Bold';
+      } else if (medium) {
+        return 'JosefinSans-Medium';
+      } else if (italic) {
+        return 'JosefinSans-Italic';
+      } else if (bold && italic) {
+        return 'JosefinSans-BoldItalic';
+      } else if (medium && italic) {
+        return 'JosefinSans-MediumItalic';
+      } else {
+        return 'JosefinSans-Regular';
+      }
+    } else {
+      if (bold) {
+        return 'UbuntuMono-Bold';
+      } else if (italic) {
+        return 'UbuntuMono-Italic';
+      } else if (bold && italic) {
+        return 'UbuntuMono-BoldItalic';
+      } else {
+        return 'UbuntuMono-Regular';
+      }
+    }
+  };
+
   return (
     <>
-      {bold && italic ? (
-        <Text {...props} style={[styles.boldItalic, style]}>
-          {children}
-        </Text>
-      ) : bold ? (
-        <Text {...props} style={[styles.bold, style]}>
-          {children}
-        </Text>
-      ) : italic ? (
-        <Text {...props} style={[styles.italic, style]}>
-          {children}
-        </Text>
-      ) : (
-        <Text {...props} style={[styles.regular, style]}>
-          {children}
-        </Text>
-      )}
+      <Text
+        {...props}
+        style={[
+          {
+            fontFamily: fontType(),
+          },
+          style,
+        ]}>
+        {children}
+      </Text>
     </>
   );
 }

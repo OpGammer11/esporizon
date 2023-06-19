@@ -9,7 +9,8 @@ import auth from '@react-native-firebase/auth';
 
 // Screens
 import Home from './screens/Home';
-import Page from './screens/Profile';
+import Profile from './screens/Profile';
+import Notification from './screens/Notification';
 import Login from './screens/auth/Login';
 import Otp from './screens/auth/Otp';
 
@@ -42,8 +43,17 @@ export default function Appnavigator() {
               options={{headerShown: false}}
             />
             <Stack.Screen
-              name="Page"
-              component={Page}
+              name="Profile"
+              component={Profile}
+              options={screenStackConfig.translateXleft}
+              sharedElements={(route, otherRoute, showing) => {
+                const {image} = route.params;
+                return [`item.${image}.photo`];
+              }}
+            />
+            <Stack.Screen
+              name="Notification"
+              component={Notification}
               options={screenStackConfig.translateX}
               sharedElements={(route, otherRoute, showing) => {
                 const {image} = route.params;

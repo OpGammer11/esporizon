@@ -13,6 +13,7 @@ import MyText from './MyText';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import {Text} from 'moti';
+import {colors} from '../utils/colors';
 
 const {width, height} = Dimensions.get('window');
 export default function LoginPageSetup({children}) {
@@ -45,12 +46,17 @@ export default function LoginPageSetup({children}) {
             <LinearGradient
               start={{x: 0, y: 1}}
               end={{x: 0, y: 0}}
-              colors={['black', 'black', 'transparent']}
+              colors={[colors.background, colors.background, 'transparent']}
               style={{flex: 1, justifyContent: 'flex-end'}}>
               <LinearGradient
                 start={{x: 0, y: 1}}
                 end={{x: 0, y: 0}}
-                colors={['black', 'black', 'black', 'transparent']}
+                colors={[
+                  colors.background,
+                  colors.background,
+                  colors.background,
+                  'transparent',
+                ]}
                 style={styles.mainContainer}>
                 <MyText
                   style={{
@@ -76,7 +82,7 @@ const styles = StyleSheet.create({
     width: width,
     height: height,
     zIndex: -1,
-    backgroundColor: 'black',
+    backgroundColor: colors.background,
   },
   mainContainer: {
     backgroundColor: 'transparent',

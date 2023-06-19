@@ -6,17 +6,20 @@
  */
 
 import {Image, StatusBar, useColorScheme} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {Suspense, useEffect} from 'react';
 import RNBootSplash from 'react-native-bootsplash';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Appnavigator from './Appnavigation';
-import FastImage from 'react-native-fast-image';
 import {RecoilRoot} from 'recoil';
+import ReactNativeRecoilPersist, {
+  ReactNativeRecoilPersistGate,
+} from 'react-native-recoil-persist';
+import {View} from 'moti';
 
 export default function App() {
   useEffect(() => {
     const init = async () => {
-      console.log('App is loading...');
+      // console.log('init');
     };
     init().finally(() => {
       RNBootSplash.hide({fade: true, duration: 250});
@@ -25,16 +28,28 @@ export default function App() {
 
   return (
     <>
-      <RecoilRoot>
-        <StatusBar
-          barStyle={'light-content'}
-          translucent={true}
-          backgroundColor={'transparent'}
-        />
-        <SafeAreaProvider>
-          <Appnavigator />
-        </SafeAreaProvider>
-      </RecoilRoot>
+      <StatusBar
+        barStyle={'light-content'}
+        translucent={true}
+        backgroundColor={'transparent'}
+      />
+      <Suspense
+        fallback={
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: 'black',
+            }}
+          />
+        }>
+        <RecoilRoot>
+          <ReactNativeRecoilPersistGate store={ReactNativeRecoilPersist}>
+            <SafeAreaProvider>
+              <Appnavigator />
+            </SafeAreaProvider>
+          </ReactNativeRecoilPersistGate>
+        </RecoilRoot>
+      </Suspense>
     </>
   );
 }
