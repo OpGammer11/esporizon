@@ -12,7 +12,8 @@ import LoginPageSetup from '../../components/LoginPagesetup';
 import {MotiView, AnimatePresence, Text} from 'moti';
 import auth from '@react-native-firebase/auth';
 import {useRecoilState} from 'recoil';
-import {FAuthConfirm} from '../../providers/recoilStore';
+import {FAuthConfirm} from '../../providers/recoilStore.js';
+import {FUserData, Name} from '../../providers/recoilStore.js';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FIcon from 'react-native-vector-icons/Feather';
 import {colors} from '../../utils/colors';
@@ -33,6 +34,12 @@ export default function Login({navigation}) {
   const [exited, setExited] = useState(false);
   const [okForOtp, setOkForOtp] = useState(false);
   const [fbConfirm, setFbConfirm] = useRecoilState(FAuthConfirm);
+
+  const [userData, setUserData] = useRecoilState(FUserData);
+
+  useEffect(() => {
+    setUserData(null);
+  }, []);
 
   useEffect(() => {
     if (loading) {

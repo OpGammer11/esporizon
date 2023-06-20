@@ -1,14 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  TextInput,
-  Dimensions,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, View, Dimensions} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {SharedElement} from 'react-navigation-shared-element';
 import {SvgUri} from 'react-native-svg';
@@ -23,6 +14,7 @@ import {formatNumber} from '../utils/number';
 
 export default function Home({navigation}) {
   const {width, height} = Dimensions.get('window');
+
   const [userData, setUserData] = useRecoilState(FUserData);
   const {username, uid, mob} = userData || {username: '', uid: '', mob: ''};
 
@@ -33,9 +25,6 @@ export default function Home({navigation}) {
 
     if (userData === null) {
       getUserData();
-    } else if (userData.uid != auth().currentUser.uid) {
-      getUserData();
-      // console.log('user data updated');
     } else {
       // console.log('user data is already there');
     }
@@ -97,20 +86,22 @@ export default function Home({navigation}) {
           </TouchableOpacity>
           <View
             style={{
-              marginLeft: 20,
+              marginLeft: 10,
               flexDirection: 'row',
               alignItems: 'flex-end',
               justifyContent: 'center',
               // backgroundColor: 'white',
             }}>
-            <MyText style={{fontSize: 32, color: 'grey'}}>Hello,</MyText>
+            <MyText style={{fontSize: 26, color: 'grey'}}>Hello,</MyText>
             <MyText
               style={{
-                fontSize: 32,
+                fontSize: 26,
                 color: colors.text,
                 marginLeft: 5,
               }}>
-              {`${username.charAt(0).toUpperCase()}${username.slice(1)}`}!
+              {username
+                ? `${username.charAt(0).toUpperCase()}${username.slice(1)}!`
+                : ''}
             </MyText>
           </View>
           <View
@@ -145,25 +136,9 @@ export default function Home({navigation}) {
           </View>
         </View>
         <View style={styles.main}>
-          <View>
-            <MyText
-              style={{fontSize: 20, color: colors.text, marginBottom: 10}}>
-              // Your Earnings //
-            </MyText>
-            <View style={styles.earningsCard}>
-              <View style={styles.earningsCardHeader}>
-                <MyText josefin style={{fontSize: 35, color: colors.text}}>
-                  Total Earned
-                </MyText>
-                <MyText
-                  josefin
-                  italic
-                  style={{fontSize: 18, color: colors.primary}}>
-                  ₹ {formatNumber(userData?.totalEarned || 4600)}
-                </MyText>
-              </View>
-            </View>
-          </View>
+          <MyText style={{fontSize: 32, color: colors.text, marginBottom: 20}}>
+            {formatNumber(9000)}
+          </MyText>
         </View>
       </SafeAreaView>
     </>
