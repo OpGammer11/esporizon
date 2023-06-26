@@ -10,7 +10,7 @@ export const staticConfig = {
 export const screenStackConfig = {
   translateX: {
     headerShown: false,
-    gestureDirection: 'vertical',
+    gestureDirection: 'horizontal',
     transitionSpec: {
       open: staticConfig,
       close: staticConfig,
@@ -32,7 +32,7 @@ export const screenStackConfig = {
   },
   translateXleft: {
     headerShown: false,
-    gestureDirection: 'vertical',
+    gestureDirection: 'horizontal',
     transitionSpec: {
       open: staticConfig,
       close: staticConfig,

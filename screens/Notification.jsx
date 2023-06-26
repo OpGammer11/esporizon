@@ -4,8 +4,9 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {useRoute} from '@react-navigation/native';
 import {SharedElement} from 'react-navigation-shared-element';
 import {colors} from '../utils/colors';
+import MyText from '../components/MyText';
 
-export default function Page({navigation}) {
+export default function Notification({navigation}) {
   const route = useRoute();
   return (
     <SafeAreaView
@@ -15,7 +16,7 @@ export default function Page({navigation}) {
         alignItems: 'center',
         backgroundColor: 'black',
       }}>
-      <Text>Notification</Text>
+      <MyText>Notification</MyText>
     </SafeAreaView>
   );
 }

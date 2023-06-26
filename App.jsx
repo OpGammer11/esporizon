@@ -18,12 +18,7 @@ import {View} from 'moti';
 
 export default function App() {
   useEffect(() => {
-    const init = async () => {
-      // console.log('init');
-    };
-    init().finally(() => {
-      RNBootSplash.hide({fade: true, duration: 250});
-    });
+    RNBootSplash.hide({fade: true, duration: 250});
   }, []);
 
   return (

@@ -118,7 +118,7 @@ export const Edit = props => (
   </Svg>
 );
 
-export const Home = props => (
+export const HomeIcon = props => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width={props.size || 24}
@@ -127,13 +127,13 @@ export const Home = props => (
     fill="none"
     {...props}>
     <Path
-      fill="#FEFEFE"
+      fill={props.primaryColor || '#FEFEFE'}
       d="M30 130.12c0-15.145 18.438-22.587 28.95-11.685l32.365 33.563c7.433 7.708 20.079 6.609 26.07-2.267l50.163-74.316c6.674-9.887 21.23-9.887 27.904 0l50.163 74.316c5.991 8.876 18.637 9.975 26.07 2.267l32.364-33.563C314.562 107.533 333 114.975 333 130.12v149.07c0 9.297-7.537 16.833-16.833 16.833H46.833c-9.297 0-16.833-7.536-16.833-16.833V130.12Z"
     />
   </Svg>
 );
 
-export const Notification = props => (
+export const NotifIcon = props => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width={props.size || 24}
@@ -152,7 +152,7 @@ export const Notification = props => (
   </Svg>
 );
 
-export const Team = props => (
+export const TeamIcon = props => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width={props.size || 24}

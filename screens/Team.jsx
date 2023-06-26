@@ -1,20 +1,12 @@
 import React from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Dimensions,
-} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useRoute} from '@react-navigation/native';
 import {SharedElement} from 'react-navigation-shared-element';
 import {colors} from '../utils/colors';
+import MyText from '../components/MyText';
 
-const {width, height} = Dimensions.get('window');
-
-export default function Page({navigation}) {
+export default function Team({navigation}) {
   const route = useRoute();
   return (
     <SafeAreaView
@@ -22,9 +14,9 @@ export default function Page({navigation}) {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.background,
+        backgroundColor: 'black',
       }}>
-      <Text>Page</Text>
+      <MyText>Team</MyText>
     </SafeAreaView>
   );
 }

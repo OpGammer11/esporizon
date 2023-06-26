@@ -8,6 +8,7 @@ import {screenStackConfig, staticConfig} from './utils/pagetransitions';
 import auth from '@react-native-firebase/auth';
 
 // Screens
+import Root from './screens/Root';
 import Home from './screens/Home';
 import Profile from './screens/Profile';
 import Notification from './screens/Notification';
@@ -38,14 +39,14 @@ export default function Appnavigator() {
         {isLoggedin ? (
           <>
             <Stack.Screen
-              name="Home"
-              component={Home}
+              name="Root"
+              component={Root}
               options={{headerShown: false}}
             />
             <Stack.Screen
               name="Profile"
               component={Profile}
-              options={screenStackConfig.translateXleft}
+              options={screenStackConfig.translateX}
               sharedElements={(route, otherRoute, showing) => {
                 const {image} = route.params;
                 return [`item.${image}.photo`];

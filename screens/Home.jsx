@@ -1,22 +1,32 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, TouchableOpacity, View, Dimensions} from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Dimensions,
+  ScrollView,
+  Pressable,
+} from 'react-native';
+// import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {SharedElement} from 'react-navigation-shared-element';
 import {SvgUri} from 'react-native-svg';
 import auth from '@react-native-firebase/auth';
 import {useRecoilState} from 'recoil';
-import {FUserData, Name} from '../providers/recoilStore';
+import {FUserData} from '../providers/recoilStore';
 import MyText from '../components/MyText';
 import firestore from '@react-native-firebase/firestore';
-import {Notification} from '../components/Svgicon';
 import {colors} from '../utils/colors';
-import {formatNumber} from '../utils/number';
+import getRandomGreeting from '../utils/randomgreet';
+import HomeMain from '../components/Homemain';
 
-export default function Home({navigation}) {
-  const {width, height} = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
+export default function HomeSetup({navigation}) {
+  // const Tab = createBottomTabNavigator();
 
+  const [greet, setGreet] = useState(getRandomGreeting());
   const [userData, setUserData] = useRecoilState(FUserData);
   const {username, uid, mob} = userData || {username: '', uid: '', mob: ''};
+  const [numberOfLines, setNumberOfLines] = useState(1);
 
   useEffect(() => {
     if (!auth().currentUser) {
@@ -47,100 +57,65 @@ export default function Home({navigation}) {
 
   return (
     <>
-      <SafeAreaView
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        scrollEventThrottle={16}
         style={{
-          flex: 1,
-          paddingHorizontal: 20,
           backgroundColor: colors.background,
         }}>
-        <View style={styles.header}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Profile');
-            }}
-            style={{
-              width: 50,
-              height: 50,
-              borderRadius: 30,
-              borderColor: colors.secondryBg,
-              borderWidth: 2,
-              justifyContent: 'center',
-              alignItems: 'center',
-              overflow: 'hidden',
-
-              //shadow
-              shadowColor: colors.secondary,
-              shadowOffset: {
-                width: 0,
-                height: 30,
-              },
-              shadowOpacity: 0.5,
-              shadowRadius: 20,
-              elevation: 30,
-            }}>
-            <SvgUri
-              uri={`https://api.dicebear.com/6.x/adventurer-neutral/svg?seed=${username}&backgroundColor=ffdfbf`}
-              height={50}
-              width={50}
-            />
-          </TouchableOpacity>
-          <View
-            style={{
-              marginLeft: 10,
-              flexDirection: 'row',
-              alignItems: 'flex-end',
-              justifyContent: 'center',
-              // backgroundColor: 'white',
-            }}>
-            <MyText style={{fontSize: 26, color: 'grey'}}>Hello,</MyText>
-            <MyText
+        <SafeAreaView
+          style={{
+            flex: 1,
+            paddingHorizontal: 20,
+            backgroundColor: colors.background,
+          }}>
+          <View style={styles.header}>
+            <View
               style={{
-                fontSize: 26,
-                color: colors.text,
-                marginLeft: 5,
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                justifyContent: 'center',
+                width: numberOfLines === 1 ? '60%' : 'auto',
+                overflow: 'hidden',
               }}>
-              {username
-                ? `${username.charAt(0).toUpperCase()}${username.slice(1)}!`
-                : ''}
-            </MyText>
-          </View>
-          <View
-            style={{
-              borderRadius: 20,
-              height: 50,
-              width: 50,
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: '#2b2c28',
-              alignSelf: 'flex-end',
-              marginLeft: 'auto',
+              <Pressable
+                delayLongPress={100}
+                onPressOut={() => {
+                  setNumberOfLines(1);
+                }}
+                onLongPress={() => {
+                  setNumberOfLines(0);
+                }}>
+                <MyText serif style={{fontSize: 18, color: 'grey'}}>
+                  {`${greet.toLocaleUpperCase()}`},
+                </MyText>
 
-              //shadow
-              shadowColor: colors.secondary,
-              shadowOffset: {
-                width: 10,
-                height: 0,
-              },
-              shadowOpacity: 0.58,
-              shadowRadius: 16.0,
-
-              elevation: 16,
-            }}>
+                <MyText
+                  serif
+                  numberOfLines={numberOfLines}
+                  style={{
+                    fontSize: 28,
+                    color: colors.text,
+                  }}>
+                  {`${username.charAt(0).toUpperCase()}${username.slice(1)}!`}
+                </MyText>
+              </Pressable>
+            </View>
             <TouchableOpacity
               onPress={() => {
-                // navigation.navigate('Notification');
-                auth().signOut();
-              }}>
-              <Notification size={32} accentColor={'grey'} />
+                navigation.navigate('Profile');
+              }}
+              style={styles.profile}>
+              <SvgUri
+                uri={`https://api.dicebear.com/6.x/adventurer-neutral/svg?seed=${username}&backgroundColor=ffdfbf`}
+                height={50}
+                width={50}
+              />
             </TouchableOpacity>
           </View>
-        </View>
-        <View style={styles.main}>
-          <MyText style={{fontSize: 32, color: colors.text, marginBottom: 20}}>
-            {formatNumber(9000)}
-          </MyText>
-        </View>
-      </SafeAreaView>
+          <HomeMain />
+        </SafeAreaView>
+      </ScrollView>
     </>
   );
 }
@@ -150,32 +125,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 10,
-    // backgroundColor: 'white',
   },
-  main: {
-    flex: 1,
-    // backgroundColor: 'white',
-    marginTop: 40,
-  },
-  earningsCard: {
-    height: 250,
-    width: '100%',
-    borderRadius: 20,
-    backgroundColor: colors.background,
-    padding: 20,
+  profile: {
+    width: 50,
+    height: 50,
+    borderRadius: 30,
+    borderColor: colors.secondryBg,
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+    marginLeft: 'auto',
 
     //shadow
-    shadowColor: 'grey',
+    shadowColor: colors.secondary,
     shadowOffset: {
-      width: 10,
+      width: 0,
       height: 0,
     },
-    shadowOpacity: 0.2,
-    shadowRadius: 16.0,
-    elevation: 16,
-  },
-  earningsCardHeader: {
-    justifyContent: 'space-between',
-    backgroundColor: 'transparent',
+    shadowOpacity: 1,
+    shadowRadius: 10,
+    elevation: 50,
   },
 });

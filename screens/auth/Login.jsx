@@ -303,7 +303,7 @@ export default function Login({navigation}) {
                   style={[styles.txtInput, {marginLeft: 10}]}
                   placeholder="Unique Username"
                   placeholderTextColor={'grey'}
-                  maxLength={30}
+                  maxLength={20}
                   cursorColor={'white'}
                 />
               </View>
