@@ -6,18 +6,15 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, {useMemo} from 'react';
 import MyText from './MyText';
 import {colors} from '../utils/colors';
 import {MotiView} from 'moti';
 
 const {width, height} = Dimensions.get('window');
 
-export default function HomeMain() {
-  //random number between 0-1
-  function randomNum() {
-    return Math.random();
-  }
+export default function HomeMain({navigation}) {
+  const LOADING_DELAY = 1000;
 
   return (
     <View style={styles.main}>
@@ -33,97 +30,209 @@ export default function HomeMain() {
         transition={{
           type: 'timing',
           duration: 200,
-          delay: 1000,
+          delay: LOADING_DELAY + 500,
         }}
-        style={{
-          width: width - 40,
-          height: 200,
-          backgroundColor: colors.secondryBg,
-          borderRadius: 20,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+        style={styles.mainCard}>
         <MyText
-          serif
           style={{
             fontSize: 40,
             color: colors.text,
           }}>
-          0
+          Test APK
         </MyText>
       </MotiView>
       <MyText
-        serif
         style={{
           fontSize: 20,
           color: colors.text,
         }}>
         GAMES
       </MyText>
-      <TouchableOpacity>
-        <View key={'ff'} style={styles.gameCard}>
-          <View
-            style={{
-              width: '60%',
-              height: '140%',
-              position: 'absolute',
-              right: -20,
-              bottom: 0,
-            }}>
-            <Image
+
+      {/* //Freefire  */}
+      <MotiView
+        key={'ff'}
+        from={{
+          opacity: 0,
+          translateX: -100,
+        }}
+        animate={useMemo(() => {
+          return {
+            opacity: 1,
+            translateX: 0,
+          };
+        }, [])}
+        transition={{
+          type: 'timing',
+          duration: 250,
+          delay: LOADING_DELAY + 100,
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('EspoPage', {gameId: 'freefire'});
+          }}>
+          <View style={[styles.gameCard, {backgroundColor: '#E83A47'}]}>
+            <View
               style={{
                 width: '100%',
                 height: '100%',
-                resizeMode: 'cover',
-              }}
-              source={require('../assets/games/ff.png')}
-            />
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                opacity: 0.5,
+              }}>
+              <Image
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  resizeMode: 'contain',
+                }}
+                source={require('../assets/games/freefirebg.png')}
+              />
+            </View>
+            <View
+              style={{
+                width: '60%',
+                height: '140%',
+                position: 'absolute',
+                right: -20,
+                bottom: 0,
+              }}>
+              <Image
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  resizeMode: 'cover',
+                }}
+                source={require('../assets/games/ff.png')}
+              />
+            </View>
           </View>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <View key={'ff'} style={[styles.gameCard]}>
-          <View
-            style={{
-              width: '50%',
-              height: '150%',
-              position: 'absolute',
-              left: -20,
-              bottom: -10,
-              transform: [{scaleX: -1}],
-            }}>
-            <Image
+        </TouchableOpacity>
+      </MotiView>
+      {/* //BGMI  */}
+      <MotiView
+        key={'bgmi'}
+        from={{
+          opacity: 0,
+          translateX: 100,
+        }}
+        animate={useMemo(() => {
+          return {
+            opacity: 1,
+            translateX: 0,
+          };
+        }, [])}
+        transition={{
+          type: 'timing',
+          duration: 250,
+          delay: LOADING_DELAY + 200,
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('EspoPage', {gameId: 'bgmi'});
+          }}>
+          <View style={[styles.gameCard, {backgroundColor: '#F6972F'}]}>
+            <View
+              style={{
+                width: '110%',
+                height: '100%',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                opacity: 0.5,
+              }}>
+              <Image
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  resizeMode: 'cover',
+                }}
+                source={require('../assets/games/bgmibg.png')}
+              />
+            </View>
+            <View
+              style={{
+                width: '50%',
+                height: '150%',
+                position: 'absolute',
+                left: -20,
+                bottom: -10,
+                transform: [{scaleX: -1}],
+              }}>
+              <Image
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  resizeMode: 'contain',
+                }}
+                source={require('../assets/games/pubg.png')}
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
+      </MotiView>
+      {/* //COD */}
+      <MotiView
+        key={'cod'}
+        from={{
+          opacity: 0,
+          translateX: -100,
+        }}
+        animate={useMemo(() => {
+          return {
+            opacity: 1,
+            translateX: 0,
+          };
+        }, [])}
+        transition={{
+          type: 'timing',
+          duration: 250,
+          delay: LOADING_DELAY + 300,
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('EspoPage', {gameId: 'codm'});
+          }}>
+          <View style={[styles.gameCard, {backgroundColor: '#017AD8'}]}>
+            <View
               style={{
                 width: '100%',
                 height: '100%',
-                resizeMode: 'contain',
-              }}
-              source={require('../assets/games/pubg.png')}
-            />
-          </View>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <View key={'ff'} style={styles.gameCard}>
-          <View
-            style={{
-              width: '40%',
-              height: '160%',
-              position: 'absolute',
-              right: 12,
-              bottom: 0,
-            }}>
-            <Image
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                opacity: 0.5,
+              }}>
+              <Image
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  resizeMode: 'contain',
+                }}
+                source={require('../assets/games/codbg.png')}
+              />
+            </View>
+            <View
               style={{
-                width: '100%',
-                height: '100%',
-                resizeMode: 'cover',
-              }}
-              source={require('../assets/games/cod.png')}
-            />
+                width: '40%',
+                height: '160%',
+                position: 'absolute',
+                right: 12,
+                bottom: 0,
+              }}>
+              <Image
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  resizeMode: 'cover',
+                }}
+                source={require('../assets/games/cod.png')}
+              />
+            </View>
           </View>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </MotiView>
     </View>
   );
 }
@@ -137,10 +246,16 @@ const styles = StyleSheet.create({
   gameCard: {
     width: width - 40,
     height: 150,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  mainCard: {
+    width: width - 40,
+    height: 200,
     backgroundColor: colors.secondryBg,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    // overflow: 'hidden',
   },
 });

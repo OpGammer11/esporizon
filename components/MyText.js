@@ -3,11 +3,19 @@ import React from 'react';
 
 export default function MyText({children, ...props}) {
   const {style} = props;
-  const {serif, bold, italic, josefin, medium} = props;
+  const {serif, bold, italic, josefin, medium, teko} = props;
 
   const fontType = () => {
     if (serif) {
       return 'Vollkorn-Regular';
+    } else if (teko) {
+      if (bold) {
+        return 'Teko-Bold';
+      } else if (medium) {
+        return 'Teko-Medium';
+      } else {
+        return 'Teko-Regular';
+      }
     } else if (josefin) {
       if (bold) {
         return 'JosefinSans-Bold';

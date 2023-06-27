@@ -56,7 +56,7 @@ function TabBarBtn({accessibilityState, onPress, label, children}) {
           <HomeIcon
             primaryColor={isFocused ? colors.secondryBg : colors.text}
           />
-        ) : label === 'Team' ? (
+        ) : label === 'Teams' ? (
           <TeamIcon
             primaryColor={isFocused ? colors.secondryBg : colors.text}
             accentColor={isFocused ? colors.secondryBg : colors.text}
@@ -85,7 +85,6 @@ function TabBarBtn({accessibilityState, onPress, label, children}) {
           duration: 180,
         }}>
         <MyText
-          serif
           numberOfLines={1}
           style={{
             color: isFocused ? colors.secondryBg : 'transparent',
@@ -108,9 +107,6 @@ export default function Root() {
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarIconStyle: {
-          display: 'none',
-        },
         tabBarStyle: {
           elevation: 0,
           backgroundColor: colors.secondryBg,
@@ -134,7 +130,7 @@ export default function Root() {
         name="Team"
         component={Team}
         options={{
-          tabBarButton: props => <TabBarBtn label="Team" {...props} />,
+          tabBarButton: props => <TabBarBtn label="Teams" {...props} />,
         }}
       />
       <Tab.Screen

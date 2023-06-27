@@ -9,11 +9,12 @@ import auth from '@react-native-firebase/auth';
 
 // Screens
 import Root from './screens/Root';
-import Home from './screens/Home';
+import Balance from './screens/Balance';
 import Profile from './screens/Profile';
 import Notification from './screens/Notification';
 import Login from './screens/auth/Login';
 import Otp from './screens/auth/Otp';
+import EspoPage from './screens/espo/EspoPage';
 
 const Stack = createSharedElementStackNavigator();
 
@@ -42,6 +43,27 @@ export default function Appnavigator() {
               name="Root"
               component={Root}
               options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="Balance"
+              component={Balance}
+              options={{
+                presentation: 'modal',
+                gestureEnabled: true,
+                gestureDirection: 'vertical',
+                cardStyle: {backgroundColor: 'black'},
+                gestureResponseDistance: 1000,
+                freezeOnBlur: true,
+              }}
+            />
+            <Stack.Screen
+              name="EspoPage"
+              component={EspoPage}
+              options={screenStackConfig.translateX}
+              sharedElements={(route, otherRoute, showing) => {
+                const {image} = route.params;
+                return [`item.${image}.photo`];
+              }}
             />
             <Stack.Screen
               name="Profile"

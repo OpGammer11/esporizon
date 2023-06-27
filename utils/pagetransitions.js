@@ -11,6 +11,8 @@ export const screenStackConfig = {
   translateX: {
     headerShown: false,
     gestureDirection: 'horizontal',
+    gestureEnabled: true,
+    gestureResponseDistance: 150,
     transitionSpec: {
       open: staticConfig,
       close: staticConfig,
@@ -21,8 +23,8 @@ export const screenStackConfig = {
           transform: [
             {
               translateX: progress.interpolate({
-                inputRange: [0, 1],
-                outputRange: [layouts.screen.width, 0],
+                inputRange: [0, 1, 2],
+                outputRange: [layouts.screen.width, 0, 0],
               }),
             },
           ],
@@ -32,7 +34,6 @@ export const screenStackConfig = {
   },
   translateXleft: {
     headerShown: false,
-    gestureDirection: 'horizontal',
     transitionSpec: {
       open: staticConfig,
       close: staticConfig,
@@ -43,8 +44,8 @@ export const screenStackConfig = {
           transform: [
             {
               translateX: progress.interpolate({
-                inputRange: [0, 1],
-                outputRange: [-layouts.screen.width, 0],
+                inputRange: [0, 1, 2],
+                outputRange: [-layouts.screen.width, 0, 0],
               }),
             },
           ],
@@ -55,6 +56,8 @@ export const screenStackConfig = {
   translateY: {
     headerShown: false,
     gestureDirection: 'vertical',
+    gestureEnabled: true,
+    gestureResponseDistance: 500,
     transitionSpec: {
       open: staticConfig,
       close: staticConfig,
@@ -65,8 +68,8 @@ export const screenStackConfig = {
           transform: [
             {
               translateY: progress.interpolate({
-                inputRange: [0, 1],
-                outputRange: [layouts.screen.height, 0],
+                inputRange: [0, 1, 2],
+                outputRange: [layouts.screen.height, 0, 0],
               }),
             },
           ],

@@ -1,0 +1,187 @@
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  ScrollView,
+  TouchableOpacity,
+  StatusBar,
+  Pressable,
+} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {colors} from '../../utils/colors';
+import MyText from '../../components/MyText';
+import FIcon from 'react-native-vector-icons/Feather';
+import LinearGradient from 'react-native-linear-gradient';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
+import {kFormatter} from '../../utils/number';
+
+const {width, height} = Dimensions.get('window');
+
+export default function EspoPage({navigation, route}) {
+  const insets = useSafeAreaInsets();
+  const {gameId} = route.params;
+  const [gameData, setGameData] = useState(null);
+
+  useEffect(() => {
+    if (gameId === 'bgmi') {
+      setGameData({
+        name: 'BGMI',
+        image: require('../../assets/games/pubgbg.webp'),
+      });
+    } else if (gameId === 'freefire') {
+      setGameData({
+        name: `FREE FIRE`,
+        image: require('../../assets/games/freefirebg.jpg'),
+      });
+    } else if (gameId === 'codm') {
+      setGameData({
+        name: 'CALL OF DUTY',
+        image: require('../../assets/games/codmbg.jpg'),
+      });
+    }
+  }, [gameId]);
+
+  return (
+    <>
+      {/* <StatusBar hidden barStyle="dark-content" showHideTransition={'fade'} /> */}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        scrollEventThrottle={16}
+        style={{
+          backgroundColor: colors.background,
+        }}>
+        <SafeAreaView style={styles.wrapper}>
+          <View style={[styles.header, {top: insets.top + 5}]}>
+            <TouchableOpacity
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 20,
+                width: 50,
+                height: 50,
+                backgroundColor: colors.secondryBg,
+              }}
+              onPress={() => navigation.goBack()}>
+              <FIcon name="arrow-left" size={30} color={colors.text} />
+            </TouchableOpacity>
+            <View
+              style={{
+                marginLeft: 'auto',
+                paddingLeft: 10,
+                borderRadius: 30,
+                alignSelf: 'center',
+                backgroundColor: colors.secondryBg,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: 5,
+              }}>
+              <MyText
+                style={{
+                  fontSize: 20,
+                  color: colors.text,
+                }}>
+                {kFormatter(3)}
+              </MyText>
+
+              <View
+                style={{
+                  width: 28,
+                  height: 28,
+                }}>
+                <Image
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    resizeMode: 'contain',
+                  }}
+                  source={require('../../assets/espocoin.png')}
+                />
+              </View>
+            </View>
+          </View>
+          <View style={[styles.bg, {height: height + insets.top}]}>
+            {gameData?.image && (
+              <Image
+                source={gameData.image}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  resizeMode: 'cover',
+                  transform: [{scaleX: 1}],
+                }}
+              />
+            )}
+          </View>
+          <View
+            style={{
+              height: height + insets.top,
+              width: width,
+              justifyContent: 'flex-end',
+              position: 'absolute',
+              zIndex: -1,
+            }}>
+            <LinearGradient
+              start={{x: 0, y: 1}}
+              end={{x: 0, y: 0}}
+              colors={[colors.background, 'rgba(0,0,0,0.9)', 'transparent']}
+              style={styles.mainContainer}></LinearGradient>
+          </View>
+          <View
+            style={{
+              width: width,
+              height: height,
+              backgroundColor: 'transparent',
+              marginTop: height / 2,
+            }}>
+            <MyText
+              teko
+              bold
+              style={{fontSize: 60, color: colors.text, paddingHorizontal: 20}}>
+              {gameData?.name}
+            </MyText>
+            <View
+              style={{
+                width: '100%',
+                height: '100%',
+              }}></View>
+          </View>
+        </SafeAreaView>
+      </ScrollView>
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  bg: {
+    position: 'absolute',
+    top: 0,
+    width: width,
+    zIndex: -1,
+  },
+  header: {
+    width: width,
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    position: 'absolute',
+    zIndex: 9,
+  },
+  mainContainer: {
+    backgroundColor: 'transparent',
+    width: width,
+    height: height / 1.8,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+  },
+  main: {
+    width: width,
+    height: height,
+    backgroundColor: 'red',
+  },
+});

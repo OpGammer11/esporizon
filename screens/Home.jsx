@@ -6,6 +6,7 @@ import {
   Dimensions,
   ScrollView,
   Pressable,
+  Image,
 } from 'react-native';
 // import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -18,11 +19,10 @@ import firestore from '@react-native-firebase/firestore';
 import {colors} from '../utils/colors';
 import getRandomGreeting from '../utils/randomgreet';
 import HomeMain from '../components/Homemain';
+import {formatNumber, kFormatter} from '../utils/number';
 
 const {width, height} = Dimensions.get('window');
 export default function HomeSetup({navigation}) {
-  // const Tab = createBottomTabNavigator();
-
   const [greet, setGreet] = useState(getRandomGreeting());
   const [userData, setUserData] = useRecoilState(FUserData);
   const {username, uid, mob} = userData || {username: '', uid: '', mob: ''};
@@ -70,12 +70,14 @@ export default function HomeSetup({navigation}) {
             backgroundColor: colors.background,
           }}>
           <View style={styles.header}>
+            {/* //greet */}
             <View
               style={{
                 flexDirection: 'column',
                 alignItems: 'flex-start',
+                backgroundColor: 'transparent',
                 justifyContent: 'center',
-                width: numberOfLines === 1 ? '60%' : 'auto',
+                width: numberOfLines === 1 ? '50%' : 'auto',
                 overflow: 'hidden',
               }}>
               <Pressable
@@ -86,12 +88,8 @@ export default function HomeSetup({navigation}) {
                 onLongPress={() => {
                   setNumberOfLines(0);
                 }}>
-                <MyText serif style={{fontSize: 18, color: 'grey'}}>
-                  {`${greet.toLocaleUpperCase()}`},
-                </MyText>
-
+                <MyText style={{fontSize: 18, color: 'grey'}}>{greet},</MyText>
                 <MyText
-                  serif
                   numberOfLines={numberOfLines}
                   style={{
                     fontSize: 28,
@@ -101,6 +99,50 @@ export default function HomeSetup({navigation}) {
                 </MyText>
               </Pressable>
             </View>
+
+            {/* //espocoin */}
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Balance');
+              }}
+              style={{
+                zIndex: numberOfLines === 1 ? 1 : -9999,
+                opacity: numberOfLines === 1 ? 1 : 0.3,
+                position: 'absolute',
+                right: 60,
+                paddingLeft: 10,
+                borderRadius: 30,
+                backgroundColor: colors.secondryBg,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: 5,
+              }}>
+              <MyText
+                style={{
+                  fontSize: 20,
+                  color: colors.text,
+                }}>
+                {kFormatter(userData?.espocoin || 999)}
+              </MyText>
+
+              <View
+                style={{
+                  width: 28,
+                  height: 28,
+                }}>
+                <Image
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    resizeMode: 'contain',
+                  }}
+                  source={require('../assets/espocoin.png')}
+                />
+              </View>
+            </TouchableOpacity>
+
+            {/* //profile */}
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate('Profile');
@@ -113,7 +155,7 @@ export default function HomeSetup({navigation}) {
               />
             </TouchableOpacity>
           </View>
-          <HomeMain />
+          <HomeMain navigation={navigation} />
         </SafeAreaView>
       </ScrollView>
     </>

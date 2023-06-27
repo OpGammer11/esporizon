@@ -11,10 +11,11 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {useRoute} from '@react-navigation/native';
 import {SharedElement} from 'react-navigation-shared-element';
 import {colors} from '../utils/colors';
+import MyText from '../components/MyText';
 
 const {width, height} = Dimensions.get('window');
 
-export default function Page({navigation}) {
+export default function Profile({navigation}) {
   const route = useRoute();
   return (
     <SafeAreaView
@@ -24,7 +25,13 @@ export default function Page({navigation}) {
         alignItems: 'center',
         backgroundColor: colors.background,
       }}>
-      <Text>Page</Text>
+      <MyText
+        style={{
+          fontSize: 30,
+          color: colors.text,
+        }}>
+        Profile
+      </MyText>
     </SafeAreaView>
   );
 }
