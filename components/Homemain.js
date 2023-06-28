@@ -5,6 +5,7 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
+  Pressable,
 } from 'react-native';
 import React, {useMemo} from 'react';
 import MyText from './MyText';
@@ -67,7 +68,7 @@ export default function HomeMain({navigation}) {
           duration: 250,
           delay: LOADING_DELAY + 100,
         }}>
-        <TouchableOpacity
+        <Pressable
           onPress={() => {
             navigation.navigate('EspoPage', {gameId: 'freefire'});
           }}>
@@ -108,7 +109,7 @@ export default function HomeMain({navigation}) {
               />
             </View>
           </View>
-        </TouchableOpacity>
+        </Pressable>
       </MotiView>
       {/* //BGMI  */}
       <MotiView
@@ -128,7 +129,7 @@ export default function HomeMain({navigation}) {
           duration: 250,
           delay: LOADING_DELAY + 200,
         }}>
-        <TouchableOpacity
+        <Pressable
           onPress={() => {
             navigation.navigate('EspoPage', {gameId: 'bgmi'});
           }}>
@@ -170,7 +171,7 @@ export default function HomeMain({navigation}) {
               />
             </View>
           </View>
-        </TouchableOpacity>
+        </Pressable>
       </MotiView>
       {/* //COD */}
       <MotiView
@@ -190,7 +191,7 @@ export default function HomeMain({navigation}) {
           duration: 250,
           delay: LOADING_DELAY + 300,
         }}>
-        <TouchableOpacity
+        <Pressable
           onPress={() => {
             navigation.navigate('EspoPage', {gameId: 'codm'});
           }}>
@@ -231,7 +232,7 @@ export default function HomeMain({navigation}) {
               />
             </View>
           </View>
-        </TouchableOpacity>
+        </Pressable>
       </MotiView>
     </View>
   );
