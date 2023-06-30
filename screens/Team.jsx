@@ -16,7 +16,18 @@ export default function Team({navigation}) {
         alignItems: 'center',
         backgroundColor: 'black',
       }}>
-      <MyText>Team</MyText>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Balance');
+        }}>
+        <MyText
+          style={{
+            fontSize: 30,
+            color: colors.text,
+          }}>
+          Team
+        </MyText>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }

@@ -16,6 +16,7 @@ import FIcon from 'react-native-vector-icons/Feather';
 import LinearGradient from 'react-native-linear-gradient';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import {kFormatter} from '../../utils/number';
+import Animated from 'react-native-reanimated';
 
 const {width, height} = Dimensions.get('window');
 
@@ -66,45 +67,55 @@ export default function EspoPage({navigation, route}) {
               onPress={() => navigation.goBack()}>
               <FIcon name="arrow-left" size={30} color={colors.text} />
             </TouchableOpacity>
+            {/* //espocoin */}
             <View
+              sharedTransitionTag="espocoin"
               style={{
                 marginLeft: 'auto',
                 paddingLeft: 10,
                 borderRadius: 30,
                 alignSelf: 'center',
                 backgroundColor: colors.secondryBg,
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: 5,
               }}>
-              <MyText
+              <Pressable
+                onPress={() => {
+                  navigation.navigate('Balance');
+                }}
                 style={{
-                  fontSize: 20,
-                  color: colors.text,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: 5,
                 }}>
-                {kFormatter(3)}
-              </MyText>
-
-              <View
-                style={{
-                  width: 28,
-                  height: 28,
-                }}>
-                <Image
+                <MyText
                   style={{
-                    width: '100%',
-                    height: '100%',
-                    resizeMode: 'contain',
-                  }}
-                  source={require('../../assets/espocoin.png')}
-                />
-              </View>
+                    fontSize: 20,
+                    color: colors.text,
+                  }}>
+                  {kFormatter(999)}
+                </MyText>
+
+                <View
+                  style={{
+                    width: 28,
+                    height: 28,
+                  }}>
+                  <Image
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      resizeMode: 'contain',
+                    }}
+                    source={require('../../assets/espocoin.png')}
+                  />
+                </View>
+              </Pressable>
             </View>
           </View>
           <View style={[styles.bg, {height: height + insets.top}]}>
             {gameData?.image && (
               <Image
+                blurRadius={1}
                 source={gameData.image}
                 style={{
                   width: '100%',
@@ -114,6 +125,15 @@ export default function EspoPage({navigation, route}) {
                 }}
               />
             )}
+            <View
+              style={{
+                width: width,
+                height: height,
+                position: 'absolute',
+                backgroundColor: colors.background,
+                opacity: 0.7,
+              }}
+            />
           </View>
           <View
             style={{

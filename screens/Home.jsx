@@ -20,6 +20,7 @@ import {colors} from '../utils/colors';
 import getRandomGreeting from '../utils/randomgreet';
 import HomeMain from '../components/Homemain';
 import {formatNumber, kFormatter} from '../utils/number';
+import Animated from 'react-native-reanimated';
 
 const {width, height} = Dimensions.get('window');
 export default function HomeSetup({navigation}) {
@@ -33,7 +34,7 @@ export default function HomeSetup({navigation}) {
       return;
     }
 
-    if (userData === null) {
+    if (userData !== null) {
       getUserData();
     } else {
       // console.log('user data is already there');
@@ -101,10 +102,7 @@ export default function HomeSetup({navigation}) {
             </View>
 
             {/* //espocoin */}
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('Balance');
-              }}
+            <View
               style={{
                 zIndex: numberOfLines === 1 ? 1 : -9999,
                 opacity: numberOfLines === 1 ? 1 : 0.3,
@@ -113,34 +111,41 @@ export default function HomeSetup({navigation}) {
                 paddingLeft: 10,
                 borderRadius: 30,
                 backgroundColor: colors.secondryBg,
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: 5,
               }}>
-              <MyText
+              <Pressable
+                onPress={() => {
+                  navigation.navigate('Balance');
+                }}
                 style={{
-                  fontSize: 20,
-                  color: colors.text,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: 5,
                 }}>
-                {kFormatter(userData?.espocoin || 999)}
-              </MyText>
-
-              <View
-                style={{
-                  width: 28,
-                  height: 28,
-                }}>
-                <Image
+                <MyText
                   style={{
-                    width: '100%',
-                    height: '100%',
-                    resizeMode: 'contain',
-                  }}
-                  source={require('../assets/espocoin.png')}
-                />
-              </View>
-            </TouchableOpacity>
+                    fontSize: 20,
+                    color: colors.text,
+                  }}>
+                  {kFormatter(userData?.espocoin || 999)}
+                </MyText>
+
+                <View
+                  style={{
+                    width: 28,
+                    height: 28,
+                  }}>
+                  <Image
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      resizeMode: 'contain',
+                    }}
+                    source={require('../assets/espocoin.png')}
+                  />
+                </View>
+              </Pressable>
+            </View>
 
             {/* //profile */}
             <TouchableOpacity

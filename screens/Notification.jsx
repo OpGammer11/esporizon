@@ -16,7 +16,13 @@ export default function Notification({navigation}) {
         alignItems: 'center',
         backgroundColor: 'black',
       }}>
-      <MyText>Notification</MyText>
+      <MyText
+        style={{
+          fontSize: 30,
+          color: colors.text,
+        }}>
+        Notification
+      </MyText>
     </SafeAreaView>
   );
 }

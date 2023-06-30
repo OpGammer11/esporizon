@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Image,
   StyleSheet,
@@ -16,7 +16,7 @@ import MyText from '../components/MyText';
 const {width, height} = Dimensions.get('window');
 
 export default function Profile({navigation}) {
-  const route = useRoute();
+  useEffect(() => {}, []);
   return (
     <SafeAreaView
       style={{
@@ -25,13 +25,18 @@ export default function Profile({navigation}) {
         alignItems: 'center',
         backgroundColor: colors.background,
       }}>
-      <MyText
-        style={{
-          fontSize: 30,
-          color: colors.text,
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Balance');
         }}>
-        Profile
-      </MyText>
+        <MyText
+          style={{
+            fontSize: 30,
+            color: colors.text,
+          }}>
+          Profile
+        </MyText>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }

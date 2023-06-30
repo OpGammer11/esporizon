@@ -1,8 +1,15 @@
 // React native navigation
 import React, {useEffect, useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {View} from 'react-native';
-import {TransitionSpecs} from '@react-navigation/stack';
+import {Animated} from 'react-native';
+import {DarkTheme, NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {
+  TransitionSpecs,
+  CardStyleInterpolators,
+  TransitionPreset,
+  createStackNavigator,
+  TransitionPresets,
+} from '@react-navigation/stack';
 import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 import {screenStackConfig, staticConfig} from './utils/pagetransitions';
 import auth from '@react-native-firebase/auth';
@@ -16,6 +23,8 @@ import Login from './screens/auth/Login';
 import Otp from './screens/auth/Otp';
 import EspoPage from './screens/espo/EspoPage';
 
+// const Stack = createNativeStackNavigator();
+// const Stack = createStackNavigator();
 const Stack = createSharedElementStackNavigator();
 
 export default function Appnavigator() {
@@ -33,55 +42,46 @@ export default function Appnavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator
+        detachInactiveScreens={true}
         initialRouteName="Home"
         screenOptions={{
           headerShown: false,
+          // presentation: 'modal',
         }}>
         {isLoggedin ? (
           <>
-            <Stack.Screen
-              name="Root"
-              component={Root}
-              options={{headerShown: false}}
-            />
+            <Stack.Screen name="Root" component={Root} />
             <Stack.Screen
               name="Balance"
               component={Balance}
-              options={{
-                presentation: 'modal',
-                gestureEnabled: true,
-                gestureDirection: 'vertical',
-                cardStyle: {backgroundColor: 'black'},
-                gestureResponseDistance: 1000,
-                freezeOnBlur: true,
-              }}
+              options={screenStackConfig.translateY}
             />
             <Stack.Screen
               name="EspoPage"
               component={EspoPage}
               options={screenStackConfig.translateX}
-              sharedElements={(route, otherRoute, showing) => {
-                const {image} = route.params;
-                return [`item.${image}.photo`];
-              }}
+              // sharedElements={(route, otherRoute, showing) => {
+              //   const {image} = route.params;
+              //   return [`item.${image}.photo`];
+              // }}
             />
             <Stack.Screen
               name="Profile"
               component={Profile}
               options={screenStackConfig.translateX}
-              sharedElements={(route, otherRoute, showing) => {
-                const {image} = route.params;
-                return [`item.${image}.photo`];
-              }}
+              // sharedElements={(route, otherRoute, showing) => {
+              //   const {image} = route.params;
+              //   return [`item.${image}.photo`];
+              // }}
             />
             <Stack.Screen
               name="Notification"
               component={Notification}
               options={screenStackConfig.translateX}
-              sharedElements={(route, otherRoute, showing) => {
-                const {image} = route.params;
-                return [`item.${image}.photo`];
-              }}
+              // sharedElements={(route, otherRoute, showing) => {
+              //   const {image} = route.params;
+              //   return [`item.${image}.photo`];
+              // }}
             />
           </>
         ) : (

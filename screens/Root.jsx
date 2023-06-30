@@ -20,12 +20,12 @@ function TabBarBtn({accessibilityState, onPress, label, children}) {
     <MotiPressable
       key={`nav-btn-${label}`}
       from={{
-        width: 100,
+        // width: 100,
         backgroundColor: 'transparent',
       }}
       animate={useMemo(() => {
         return {
-          width: isFocused ? 100 : 100,
+          // width: isFocused ? 100 : 100,
           backgroundColor: isFocused ? 'white' : 'transparent',
         };
       }, [isFocused])}
@@ -34,17 +34,17 @@ function TabBarBtn({accessibilityState, onPress, label, children}) {
         duration: 250,
       }}
       style={{
-        // flex: 1,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         width: 100,
         padding: 10,
+        height: 50,
         borderRadius: 30,
         backgroundColor: 'transparent',
         gap: 5,
-        marginTop: 7,
+        marginVertical: 10,
       }}
       onPress={onPress}>
       <MotiView
@@ -113,10 +113,12 @@ export default function Root() {
           marginBottom: bottom + 20,
           position: 'absolute',
           marginHorizontal: 20,
+          display: 'flex',
+          rowGap: 10,
           borderTopColor: 'transparent',
           borderRadius: 20,
           alignItems: 'center',
-          height: 60,
+          height: 70,
         },
       }}>
       <Tab.Screen

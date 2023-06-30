@@ -5,8 +5,10 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
+  Pressable,
 } from 'react-native';
 import React, {useMemo} from 'react';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MyText from './MyText';
 import {colors} from '../utils/colors';
 import {MotiView} from 'moti';
@@ -15,9 +17,10 @@ const {width, height} = Dimensions.get('window');
 
 export default function HomeMain({navigation}) {
   const LOADING_DELAY = 1000;
+  const {top, bottom} = useSafeAreaInsets();
 
   return (
-    <View style={styles.main}>
+    <View style={[styles.main, {height: height + bottom}]}>
       <MotiView
         from={{
           opacity: 0,
@@ -67,7 +70,7 @@ export default function HomeMain({navigation}) {
           duration: 250,
           delay: LOADING_DELAY + 100,
         }}>
-        <TouchableOpacity
+        <Pressable
           onPress={() => {
             navigation.navigate('EspoPage', {gameId: 'freefire'});
           }}>
@@ -87,7 +90,7 @@ export default function HomeMain({navigation}) {
                   height: '100%',
                   resizeMode: 'contain',
                 }}
-                source={require('../assets/games/freefirebg.png')}
+                source={require('../assets/games/freefirelogo.png')}
               />
             </View>
             <View
@@ -108,7 +111,7 @@ export default function HomeMain({navigation}) {
               />
             </View>
           </View>
-        </TouchableOpacity>
+        </Pressable>
       </MotiView>
       {/* //BGMI  */}
       <MotiView
@@ -128,7 +131,7 @@ export default function HomeMain({navigation}) {
           duration: 250,
           delay: LOADING_DELAY + 200,
         }}>
-        <TouchableOpacity
+        <Pressable
           onPress={() => {
             navigation.navigate('EspoPage', {gameId: 'bgmi'});
           }}>
@@ -170,7 +173,7 @@ export default function HomeMain({navigation}) {
               />
             </View>
           </View>
-        </TouchableOpacity>
+        </Pressable>
       </MotiView>
       {/* //COD */}
       <MotiView
@@ -190,7 +193,7 @@ export default function HomeMain({navigation}) {
           duration: 250,
           delay: LOADING_DELAY + 300,
         }}>
-        <TouchableOpacity
+        <Pressable
           onPress={() => {
             navigation.navigate('EspoPage', {gameId: 'codm'});
           }}>
@@ -231,7 +234,7 @@ export default function HomeMain({navigation}) {
               />
             </View>
           </View>
-        </TouchableOpacity>
+        </Pressable>
       </MotiView>
     </View>
   );
@@ -239,7 +242,6 @@ export default function HomeMain({navigation}) {
 
 const styles = StyleSheet.create({
   main: {
-    height: height,
     marginTop: 30,
     gap: 20,
   },
