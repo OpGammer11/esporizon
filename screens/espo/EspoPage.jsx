@@ -17,6 +17,12 @@ import LinearGradient from 'react-native-linear-gradient';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import {kFormatter} from '../../utils/number';
 import Animated from 'react-native-reanimated';
+import {
+  scale as s,
+  verticalScale as vs,
+  moderateScale as ms,
+} from 'react-native-size-matters';
+import {SharedElement} from 'react-navigation-shared-element';
 
 const {width, height} = Dimensions.get('window');
 
@@ -34,7 +40,7 @@ export default function EspoPage({navigation, route}) {
     } else if (gameId === 'freefire') {
       setGameData({
         name: `FREE FIRE`,
-        image: require('../../assets/games/freefirebg.jpg'),
+        image: require('../../assets/games/ff.png'),
       });
     } else if (gameId === 'codm') {
       setGameData({
@@ -59,27 +65,28 @@ export default function EspoPage({navigation, route}) {
               style={{
                 alignItems: 'center',
                 justifyContent: 'center',
-                borderRadius: 20,
-                width: 50,
-                height: 50,
+                borderRadius: s(15),
+                width: vs(40),
+                height: vs(40),
                 backgroundColor: colors.secondryBg,
               }}
               onPress={() => navigation.goBack()}>
-              <FIcon name="arrow-left" size={30} color={colors.text} />
+              <FIcon name="arrow-left" size={vs(25)} color={colors.text} />
             </TouchableOpacity>
             {/* //espocoin */}
             <View
-              sharedTransitionTag="espocoin"
               style={{
+                position: 'absolute',
+                right: 20,
                 marginLeft: 'auto',
-                paddingLeft: 10,
+                paddingLeft: s(10),
                 borderRadius: 30,
                 alignSelf: 'center',
                 backgroundColor: colors.secondryBg,
               }}>
               <Pressable
                 onPress={() => {
-                  navigation.navigate('Balance');
+                  navigation.navigate('Profile');
                 }}
                 style={{
                   flexDirection: 'row',
@@ -89,7 +96,7 @@ export default function EspoPage({navigation, route}) {
                 }}>
                 <MyText
                   style={{
-                    fontSize: 20,
+                    fontSize: 18,
                     color: colors.text,
                   }}>
                   {kFormatter(999)}
@@ -97,8 +104,8 @@ export default function EspoPage({navigation, route}) {
 
                 <View
                   style={{
-                    width: 28,
-                    height: 28,
+                    width: s(22),
+                    height: s(22),
                   }}>
                   <Image
                     style={{
@@ -121,7 +128,7 @@ export default function EspoPage({navigation, route}) {
                   width: '100%',
                   height: '100%',
                   resizeMode: 'cover',
-                  transform: [{scaleX: 1}],
+                  transform: [{scaleX: -1}],
                 }}
               />
             )}

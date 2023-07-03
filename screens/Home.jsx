@@ -7,8 +7,9 @@ import {
   ScrollView,
   Pressable,
   Image,
+  RefreshControl,
 } from 'react-native';
-// import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import dynamiclinks from '@react-native-firebase/dynamic-links';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {SvgUri} from 'react-native-svg';
 import auth from '@react-native-firebase/auth';
@@ -21,11 +22,19 @@ import getRandomGreeting from '../utils/randomgreet';
 import HomeMain from '../components/Homemain';
 import {formatNumber, kFormatter} from '../utils/number';
 import Animated from 'react-native-reanimated';
+import {
+  scale as s,
+  verticalScale as vs,
+  moderateScale as ms,
+} from 'react-native-size-matters';
+import {MotiView} from 'moti';
+import {SharedElement} from 'react-navigation-shared-element';
 
 const {width, height} = Dimensions.get('window');
 export default function HomeSetup({navigation}) {
   const [greet, setGreet] = useState(getRandomGreeting());
   const [userData, setUserData] = useRecoilState(FUserData);
+  const [refreshing, setRefreshing] = useState(false);
   const {username, uid, mob} = userData || {username: '', uid: '', mob: ''};
   const [numberOfLines, setNumberOfLines] = useState(1);
 
@@ -34,26 +43,46 @@ export default function HomeSetup({navigation}) {
       return;
     }
 
-    if (userData !== null) {
+    if (userData === null) {
       getUserData();
     } else {
       // console.log('user data is already there');
     }
-
-    function getUserData() {
-      const user = auth().currentUser;
-      if (user) {
-        firestore()
-          .collection('user')
-          .doc(user.uid)
-          .get()
-          .then(documentSnapshot => {
-            if (documentSnapshot.exists) {
-              setUserData(documentSnapshot.data());
-            }
-          });
-      }
+  }, []);
+  function getUserData() {
+    const user = auth().currentUser;
+    if (user) {
+      firestore()
+        .collection('user')
+        .doc(user.uid)
+        .get()
+        .then(documentSnapshot => {
+          if (documentSnapshot.exists) {
+            console.log('User data: ', documentSnapshot.data());
+            setUserData(documentSnapshot.data());
+            console.log('user data fetched');
+          }
+        });
     }
+  }
+  useEffect(() => {
+    const unsubscribe = dynamiclinks().onLink(handleDynamicLink);
+    return () => unsubscribe();
+  }, []);
+
+  function handleDynamicLink(link) {
+    if (link.url === 'https://esporizon.in/user/anku') {
+      console.log('link matched', link.url);
+    }
+  }
+  function conr() {
+    console.log('conr');
+  }
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    getUserData();
+    setRefreshing(false);
   }, []);
 
   return (
@@ -61,6 +90,14 @@ export default function HomeSetup({navigation}) {
       <ScrollView
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={[colors.primary]}
+            progressBackgroundColor={colors.secondryBg}
+          />
+        }
         style={{
           backgroundColor: colors.background,
         }}>
@@ -70,7 +107,21 @@ export default function HomeSetup({navigation}) {
             paddingHorizontal: 20,
             backgroundColor: colors.background,
           }}>
-          <View style={styles.header}>
+          <MotiView
+            from={{
+              opacity: 0,
+              translateY: -100,
+            }}
+            animate={{
+              opacity: 1,
+              translateY: 0,
+            }}
+            transition={{
+              type: 'timing',
+              duration: 200,
+              delay: 1000,
+            }}
+            style={styles.header}>
             {/* //greet */}
             <View
               style={{
@@ -107,7 +158,7 @@ export default function HomeSetup({navigation}) {
                 zIndex: numberOfLines === 1 ? 1 : -9999,
                 opacity: numberOfLines === 1 ? 1 : 0.3,
                 position: 'absolute',
-                right: 60,
+                right: s(60),
                 paddingLeft: 10,
                 borderRadius: 30,
                 backgroundColor: colors.secondryBg,
@@ -124,16 +175,15 @@ export default function HomeSetup({navigation}) {
                 }}>
                 <MyText
                   style={{
-                    fontSize: 20,
+                    fontSize: 18,
                     color: colors.text,
                   }}>
                   {kFormatter(userData?.espocoin || 999)}
                 </MyText>
-
                 <View
                   style={{
-                    width: 28,
-                    height: 28,
+                    width: s(22),
+                    height: s(22),
                   }}>
                   <Image
                     style={{
@@ -150,16 +200,27 @@ export default function HomeSetup({navigation}) {
             {/* //profile */}
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('Profile');
+                navigation.navigate('Profile', {show: 'profile'});
               }}
               style={styles.profile}>
-              <SvgUri
-                uri={`https://api.dicebear.com/6.x/adventurer-neutral/svg?seed=${username}&backgroundColor=ffdfbf`}
-                height={50}
-                width={50}
-              />
+              <SharedElement
+                style={{
+                  width: '100%',
+                  height: '100%',
+                }}
+                id={`profile`}>
+                <Image
+                  source={require('../assets/defaultpfp.png')}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    resizeMode: 'cover',
+                    borderRadius: 50,
+                  }}
+                />
+              </SharedElement>
             </TouchableOpacity>
-          </View>
+          </MotiView>
           <HomeMain navigation={navigation} />
         </SafeAreaView>
       </ScrollView>
@@ -171,11 +232,11 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: ms(10),
   },
   profile: {
-    width: 50,
-    height: 50,
+    width: s(45),
+    height: s(45),
     borderRadius: 30,
     borderColor: colors.secondryBg,
     borderWidth: 2,

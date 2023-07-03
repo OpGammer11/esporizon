@@ -5,9 +5,17 @@ const {width, height} = Dimensions.get('window');
 
 export const staticConfig = {
   animation: Animated.timing,
+  config: {
+    duration: 300,
+  },
+};
+
+export const modalConfig = {
+  animation: Animated.timing,
   useNativeDriver: true,
   config: {
-    duration: 250,
+    duration: 500,
+    easing: Easing.out(Easing.poly(4)),
   },
 };
 
@@ -16,7 +24,7 @@ export const screenStackConfig = {
     headerShown: false,
     gestureDirection: 'horizontal',
     gestureEnabled: true,
-    gestureResponseDistance: 150,
+    gestureResponseDistance: 100,
     transitionSpec: {
       open: staticConfig,
       close: staticConfig,
@@ -91,7 +99,7 @@ export const screenStackConfig = {
     headerShown: false,
     gestureDirection: 'vertical',
     gestureEnabled: true,
-    gestureResponseDistance: 500,
+    gestureResponseDistance: height,
     transitionSpec: {
       open: staticConfig,
       close: staticConfig,
@@ -137,6 +145,38 @@ export const screenStackConfig = {
             outputRange: [0, 1],
             extrapolate: 'clamp',
           }),
+        },
+      };
+    },
+  },
+  modalSlidBottom: {
+    headerShown: false,
+    gestureDirection: 'vertical',
+    gestureEnabled: true,
+    gestureResponseDistance: height,
+    transitionSpec: {
+      open: modalConfig,
+      close: modalConfig,
+    },
+    cardStyleInterpolator: ({current, inverted, layouts: {screen}}) => {
+      return {
+        cardStyle: {
+          transform: [
+            {
+              translateY: Animated.multiply(
+                current.progress.interpolate({
+                  inputRange: [0, 1, 2],
+                  outputRange: [
+                    screen.height, // Focused, but offscreen in the beginning
+                    0, // Fully focused
+                    0, // Fully unfocused
+                  ],
+                  extrapolate: 'clamp',
+                }),
+                inverted,
+              ),
+            },
+          ],
         },
       };
     },

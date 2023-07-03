@@ -4,7 +4,7 @@ import Team from './Team';
 import Notification from './Notification';
 //
 
-import {StyleSheet, Text, View, Pressable} from 'react-native';
+import {StyleSheet, Text, View, Pressable, Dimensions} from 'react-native';
 import React, {Children, useMemo} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -13,6 +13,13 @@ import {MotiView, AnimatePresence} from 'moti';
 import {colors} from '../utils/colors';
 import MyText from '../components/MyText';
 import {HomeIcon, NotifIcon, TeamIcon} from '../components/Svgicon';
+import {
+  scale as s,
+  verticalScale as vs,
+  moderateScale as ms,
+} from 'react-native-size-matters';
+
+const {width, height} = Dimensions.get('window');
 
 function TabBarBtn({accessibilityState, onPress, label, children}) {
   const isFocused = accessibilityState.selected ? true : false;
@@ -38,13 +45,13 @@ function TabBarBtn({accessibilityState, onPress, label, children}) {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 100,
-        padding: 10,
-        height: 50,
+        width: s(95),
+        padding: ms(5),
+        height: vs(40),
         borderRadius: 30,
         backgroundColor: 'transparent',
         gap: 5,
-        marginVertical: 10,
+        marginVertical: vs(5),
       }}
       onPress={onPress}>
       <MotiView
@@ -54,15 +61,18 @@ function TabBarBtn({accessibilityState, onPress, label, children}) {
         }}>
         {label === 'Home' ? (
           <HomeIcon
+            size={vs(20)}
             primaryColor={isFocused ? colors.secondryBg : colors.text}
           />
         ) : label === 'Teams' ? (
           <TeamIcon
+            size={vs(20)}
             primaryColor={isFocused ? colors.secondryBg : colors.text}
             accentColor={isFocused ? colors.secondryBg : colors.text}
           />
         ) : (
           <NotifIcon
+            size={vs(20)}
             primaryColor={isFocused ? colors.secondryBg : colors.text}
             accentColor={isFocused ? colors.secondryBg : colors.text}
           />
@@ -88,7 +98,7 @@ function TabBarBtn({accessibilityState, onPress, label, children}) {
           numberOfLines={1}
           style={{
             color: isFocused ? colors.secondryBg : 'transparent',
-            fontSize: 18,
+            fontSize: ms(18),
           }}>
           {isFocused ? label : ''}
         </MyText>
@@ -105,6 +115,10 @@ export default function Root() {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
+        tabBarVisibilityAnimationConfig: {
+          type: 'timing',
+          duration: 200,
+        },
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
@@ -113,12 +127,11 @@ export default function Root() {
           marginBottom: bottom + 20,
           position: 'absolute',
           marginHorizontal: 20,
-          display: 'flex',
-          rowGap: 10,
           borderTopColor: 'transparent',
           borderRadius: 20,
           alignItems: 'center',
-          height: 70,
+          width: width - 40,
+          height: vs(50),
         },
       }}>
       <Tab.Screen
@@ -136,7 +149,7 @@ export default function Root() {
         }}
       />
       <Tab.Screen
-        name="Notif"
+        name="Notification"
         component={Notification}
         options={{
           tabBarButton: props => <TabBarBtn label="Notif" {...props} />,

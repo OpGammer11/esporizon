@@ -5,8 +5,14 @@
  * @format
  */
 
-import {Image, StatusBar, useColorScheme} from 'react-native';
+import {
+  ActivityIndicator,
+  Image,
+  StatusBar,
+  useColorScheme,
+} from 'react-native';
 import React, {Suspense, useEffect} from 'react';
+import dynamiclinks from '@react-native-firebase/dynamic-links';
 import RNBootSplash from 'react-native-bootsplash';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Appnavigator from './Appnavigation';
@@ -15,6 +21,7 @@ import ReactNativeRecoilPersist, {
   ReactNativeRecoilPersistGate,
 } from 'react-native-recoil-persist';
 import {View} from 'moti';
+import {colors} from './utils/colors';
 
 export default function App() {
   useEffect(() => {
@@ -33,9 +40,12 @@ export default function App() {
           <View
             style={{
               flex: 1,
-              backgroundColor: 'black',
-            }}
-          />
+              backgroundColor: colors.background,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <ActivityIndicator color={colors.primary} size={'large'} />
+          </View>
         }>
         <RecoilRoot>
           <ReactNativeRecoilPersistGate store={ReactNativeRecoilPersist}>

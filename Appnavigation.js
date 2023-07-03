@@ -1,15 +1,6 @@
 // React native navigation
 import React, {useEffect, useState} from 'react';
-import {Animated} from 'react-native';
 import {DarkTheme, NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {
-  TransitionSpecs,
-  CardStyleInterpolators,
-  TransitionPreset,
-  createStackNavigator,
-  TransitionPresets,
-} from '@react-navigation/stack';
 import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 import {screenStackConfig, staticConfig} from './utils/pagetransitions';
 import auth from '@react-native-firebase/auth';
@@ -18,13 +9,10 @@ import auth from '@react-native-firebase/auth';
 import Root from './screens/Root';
 import Balance from './screens/Balance';
 import Profile from './screens/Profile';
-import Notification from './screens/Notification';
 import Login from './screens/auth/Login';
 import Otp from './screens/auth/Otp';
 import EspoPage from './screens/espo/EspoPage';
 
-// const Stack = createNativeStackNavigator();
-// const Stack = createStackNavigator();
 const Stack = createSharedElementStackNavigator();
 
 export default function Appnavigator() {
@@ -39,13 +27,38 @@ export default function Appnavigator() {
       }
     });
   }, []);
+
+  const deepLinking = {
+    prefixes: ['https://esporizon.in', 'espoApp://'],
+    config: {
+      initialRouteName: 'Root',
+      screens: {
+        Root: {
+          path: 'root',
+          screens: {
+            Home: 'home',
+            Team: 'team',
+            Notification: 'notif',
+          },
+        },
+        Balance: 'balance',
+        Profile: {
+          path: 'u/:username',
+        },
+      },
+    },
+  };
+
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={deepLinking} theme={DarkTheme}>
       <Stack.Navigator
         detachInactiveScreens={true}
-        initialRouteName="Home"
+        initialRouteName="Root"
         screenOptions={{
           headerShown: false,
+          cardStyle: {
+            backgroundColor: 'transparent',
+          },
           // presentation: 'modal',
         }}>
         {isLoggedin ? (
@@ -54,34 +67,30 @@ export default function Appnavigator() {
             <Stack.Screen
               name="Balance"
               component={Balance}
-              options={screenStackConfig.translateY}
+              options={{
+                presentation: 'transparentModal',
+                ...screenStackConfig.modalSlidBottom,
+              }}
+              sharedElements={(route, otherRoute, showing) => {
+                return [`balance`];
+              }}
             />
             <Stack.Screen
               name="EspoPage"
               component={EspoPage}
               options={screenStackConfig.translateX}
-              // sharedElements={(route, otherRoute, showing) => {
-              //   const {image} = route.params;
-              //   return [`item.${image}.photo`];
-              // }}
             />
             <Stack.Screen
               name="Profile"
               component={Profile}
-              options={screenStackConfig.translateX}
-              // sharedElements={(route, otherRoute, showing) => {
-              //   const {image} = route.params;
-              //   return [`item.${image}.photo`];
-              // }}
-            />
-            <Stack.Screen
-              name="Notification"
-              component={Notification}
-              options={screenStackConfig.translateX}
-              // sharedElements={(route, otherRoute, showing) => {
-              //   const {image} = route.params;
-              //   return [`item.${image}.photo`];
-              // }}
+              options={{
+                ...screenStackConfig.translateX,
+                detachPreviousScreen: false,
+              }}
+              sharedElements={(route, otherRoute, showing) => {
+                const {show} = route.params;
+                return [`${show}`];
+              }}
             />
           </>
         ) : (

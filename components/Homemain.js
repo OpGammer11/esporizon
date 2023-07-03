@@ -12,6 +12,11 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MyText from './MyText';
 import {colors} from '../utils/colors';
 import {MotiView} from 'moti';
+import {
+  scale as s,
+  verticalScale as vs,
+  moderateScale as ms,
+} from 'react-native-size-matters';
 
 const {width, height} = Dimensions.get('window');
 
@@ -38,10 +43,10 @@ export default function HomeMain({navigation}) {
         style={styles.mainCard}>
         <MyText
           style={{
-            fontSize: 40,
+            fontSize: 20,
             color: colors.text,
           }}>
-          Test APK
+          {`width: ${width} \nheight: ${height}`}
         </MyText>
       </MotiView>
       <MyText
@@ -222,7 +227,7 @@ export default function HomeMain({navigation}) {
                 height: '160%',
                 position: 'absolute',
                 right: 12,
-                bottom: 0,
+                bottom: -0.2,
               }}>
               <Image
                 style={{
@@ -242,19 +247,20 @@ export default function HomeMain({navigation}) {
 
 const styles = StyleSheet.create({
   main: {
-    marginTop: 30,
-    gap: 20,
+    marginTop: ms(30),
+    gap: ms(20),
   },
   gameCard: {
+    // flex: 1,
     width: width - 40,
-    height: 150,
+    height: vs(115),
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
   },
   mainCard: {
     width: width - 40,
-    height: 200,
+    height: vs(160),
     backgroundColor: colors.secondryBg,
     borderRadius: 20,
     justifyContent: 'center',
