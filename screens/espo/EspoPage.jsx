@@ -40,7 +40,7 @@ export default function EspoPage({navigation, route}) {
     } else if (gameId === 'freefire') {
       setGameData({
         name: `FREE FIRE`,
-        image: require('../../assets/games/ff.png'),
+        image: require('../../assets/games/freefirebg.jpg'),
       });
     } else if (gameId === 'codm') {
       setGameData({
@@ -52,7 +52,6 @@ export default function EspoPage({navigation, route}) {
 
   return (
     <>
-      {/* <StatusBar hidden barStyle="dark-content" showHideTransition={'fade'} /> */}
       <ScrollView
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
@@ -128,7 +127,7 @@ export default function EspoPage({navigation, route}) {
                   width: '100%',
                   height: '100%',
                   resizeMode: 'cover',
-                  transform: [{scaleX: -1}],
+                  transform: [{scaleX: 1}],
                 }}
               />
             )}
@@ -153,7 +152,14 @@ export default function EspoPage({navigation, route}) {
             <LinearGradient
               start={{x: 0, y: 1}}
               end={{x: 0, y: 0}}
-              colors={[colors.background, 'rgba(0,0,0,0.9)', 'transparent']}
+              colors={[
+                colors.background,
+                'rgba(0,0,0,1)',
+                'rgba(0,0,0,1)',
+                'rgba(0,0,0,0.9)',
+                'rgba(0,0,0,0.8)',
+                'transparent',
+              ]}
               style={styles.mainContainer}></LinearGradient>
           </View>
           <View
@@ -161,7 +167,7 @@ export default function EspoPage({navigation, route}) {
               width: width,
               height: height,
               backgroundColor: 'transparent',
-              marginTop: height / 2,
+              marginTop: height / 3,
             }}>
             <MyText
               teko
@@ -202,7 +208,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: 'transparent',
     width: width,
-    height: height / 1.8,
+    height: height / 1.3,
     paddingHorizontal: 20,
     paddingBottom: 20,
   },
