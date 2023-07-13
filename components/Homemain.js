@@ -56,7 +56,6 @@ export default function HomeMain({navigation}) {
         }}>
         GAMES
       </MyText>
-
       {/* //Freefire  */}
       <MotiView
         key={'ff'}
@@ -85,17 +84,19 @@ export default function HomeMain({navigation}) {
                 width: '100%',
                 height: '100%',
                 position: 'absolute',
+                alignItems: 'center',
+                justifyContent: 'center',
                 top: 0,
                 left: 0,
                 opacity: 0.5,
               }}>
               <Image
                 style={{
-                  width: '100%',
+                  width: '80%',
                   height: '100%',
                   resizeMode: 'contain',
                 }}
-                source={require('../assets/games/freefirelogo.png')}
+                source={require('../assets/games/freefirelogo2.png')}
               />
             </View>
             <View
@@ -143,18 +144,20 @@ export default function HomeMain({navigation}) {
           <View style={[styles.gameCard, {backgroundColor: '#F6972F'}]}>
             <View
               style={{
-                width: '110%',
+                width: '100%',
                 height: '100%',
                 position: 'absolute',
+                alignItems: 'center',
+                justifyContent: 'center',
                 top: 0,
                 left: 0,
                 opacity: 0.5,
               }}>
               <Image
                 style={{
-                  width: '100%',
+                  width: '80%',
                   height: '100%',
-                  resizeMode: 'cover',
+                  resizeMode: 'contain',
                 }}
                 source={require('../assets/games/bgmibg.png')}
               />

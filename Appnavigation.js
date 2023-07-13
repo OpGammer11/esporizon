@@ -12,6 +12,7 @@ import Profile from './screens/Profile';
 import Login from './screens/auth/Login';
 import Otp from './screens/auth/Otp';
 import EspoPage from './screens/espo/EspoPage';
+import MatchesPage from './screens/espo/MatchesPage';
 
 const Stack = createSharedElementStackNavigator();
 
@@ -45,6 +46,14 @@ export default function Appnavigator() {
         Profile: {
           path: 'u/:username',
         },
+        EspoPage: {
+          path: 'espo/:gameId',
+          screens: {
+            Matches: 'matches',
+            Joined: 'joined',
+            Results: 'results',
+          },
+        },
       },
     },
   };
@@ -64,6 +73,7 @@ export default function Appnavigator() {
         {isLoggedin ? (
           <>
             <Stack.Screen name="Root" component={Root} />
+            <Stack.Screen name="Matches" component={MatchesPage} />
             <Stack.Screen
               name="Balance"
               component={Balance}

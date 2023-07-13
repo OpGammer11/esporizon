@@ -23,7 +23,7 @@ export const screenStackConfig = {
   translateX: {
     headerShown: false,
     gestureDirection: 'horizontal',
-    gestureEnabled: true,
+    // gestureEnabled: true,
     gestureResponseDistance: 100,
     transitionSpec: {
       open: staticConfig,
