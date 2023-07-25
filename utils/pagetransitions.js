@@ -6,7 +6,7 @@ const {width, height} = Dimensions.get('window');
 export const staticConfig = {
   animation: Animated.timing,
   config: {
-    duration: 300,
+    duration: 250,
   },
 };
 

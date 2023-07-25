@@ -22,7 +22,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Skeleton} from 'moti/skeleton';
 const {width, height} = Dimensions.get('window');
 
-const CARD_HEIGHT = vs(180);
+const CARD_HEIGHT = vs(200);
 const HEAD_FONTSIZE = ms(16);
 const JOINED_PPL = 45;
 
@@ -32,11 +32,12 @@ function EspoCard({item, navigation, route}) {
     <View
       style={{
         width: width - 60,
-        height: CARD_HEIGHT,
+        // height: CARD_HEIGHT,
+        maxHeight: CARD_HEIGHT,
         backgroundColor: colors.secondryBg,
-        marginRight: 10,
-        borderRadius: 8,
-        padding: 10,
+        marginRight: ms(10),
+        borderRadius: ms(8),
+        padding: ms(10),
       }}>
       {/* date*/}
       <View
@@ -44,9 +45,9 @@ function EspoCard({item, navigation, route}) {
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: 10,
+          padding: ms(10),
           borderColor: 'gray',
-          borderRadius: 8,
+          borderRadius: ms(8),
           borderWidth: 1,
           backgroundColor: colors.background,
         }}>
@@ -55,13 +56,13 @@ function EspoCard({item, navigation, route}) {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: 5,
+            gap: ms(5),
           }}>
           <View
             style={{
               opacity: 0.7,
             }}>
-            <FIcon name="calendar" size={ms(18)} color={colors.text} />
+            <FIcon name="calendar" size={ms(16)} color={colors.text} />
           </View>
           <View
             style={{
@@ -82,26 +83,82 @@ function EspoCard({item, navigation, route}) {
           <MyText
             teko
             style={{
-              fontSize: ms(12),
+              fontSize: ms(14),
               color: colors.text,
-              height: ms(12),
+              height: ms(14),
               opacity: 0.7,
             }}>
-            20 Coins / Kill
+            3 Rounds
           </MyText>
+        </View>
+      </View>
+
+      {/* game details */}
+      <View
+        style={{
+          marginTop: ms(10),
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          paddingLeft: ms(5),
+          borderRadius: ms(8),
+          // backgroundColor: colors.background,
+        }}>
+        <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: ms(5),
+            }}>
+            <View
+              style={{
+                opacity: 0.7,
+              }}>
+              <FIcon name="users" size={ms(16)} color={colors.secondary} />
+            </View>
+            <MyText
+              teko
+              style={{
+                fontSize: ms(14),
+                height: ms(14),
+                color: colors.text,
+              }}>
+              Squad
+            </MyText>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: ms(5),
+            }}>
+            <View
+              style={{
+                opacity: 0.7,
+              }}>
+              <FIcon name="map" size={ms(16)} color={colors.secondary} />
+            </View>
+            <MyText
+              teko
+              style={{
+                fontSize: ms(14),
+                height: ms(14),
+                color: colors.text,
+              }}>
+              Bermuda
+            </MyText>
+          </View>
         </View>
       </View>
 
       {/* game prize and price */}
       <View
         style={{
-          marginTop: 15,
-          gap: 10,
+          marginTop: ms(10),
         }}>
         <View
           style={{
             flexDirection: 'row',
-            alignItems: 'center',
+            alignItems: 'flex-start',
             justifyContent: 'space-between',
             // padding: 10,
           }}>
@@ -109,7 +166,7 @@ function EspoCard({item, navigation, route}) {
             style={{
               flexDirection: 'column',
               alignItems: 'flex-start',
-              gap: 10,
+              gap: ms(5),
               justifyContent: 'center',
             }}>
             <MyText
@@ -155,8 +212,8 @@ function EspoCard({item, navigation, route}) {
           <View
             style={{
               flexDirection: 'column',
-              alignItems: 'flex-end',
-              gap: 10,
+              alignItems: 'center',
+              gap: ms(5),
               justifyContent: 'center',
             }}>
             <MyText
@@ -165,43 +222,11 @@ function EspoCard({item, navigation, route}) {
                 color: colors.text,
                 opacity: 0.7,
               }}>
-              Entry
+              Winners
             </MyText>
-            <TouchableOpacity
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: colors.greenColor,
-                borderRadius: 8,
-                paddingHorizontal: 15,
-                paddingVertical: 5,
-                gap: 5,
-              }}>
-              <View
-                style={{
-                  width: 24,
-                  height: 24,
-                }}>
-                <Image
-                  source={require('../../assets/espocoin.png')}
-                  style={{width: '100%', height: '100%', resizeMode: 'contain'}}
-                />
-              </View>
-              <View
-                style={{
-                  height: ms(24),
-                }}>
-                <MyText
-                  teko
-                  style={{
-                    fontSize: ms(24),
-                    color: colors.text,
-                  }}>
-                  10
-                </MyText>
-              </View>
-            </TouchableOpacity>
+            <MyText teko style={{fontSize: ms(28), color: colors.text}}>
+              3
+            </MyText>
           </View>
         </View>
         <View
@@ -250,6 +275,61 @@ function EspoCard({item, navigation, route}) {
               /100
             </MyText>
           </View>
+        </View>
+      </View>
+
+      {/* footer */}
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          borderTopColor: 'gray',
+          borderTopWidth: 1,
+          paddingTop: ms(10),
+          marginTop: ms(10),
+        }}>
+        <View style={{}}></View>
+        <View
+          style={{
+            marginLeft: 'auto',
+          }}>
+          <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: colors.greenColor,
+              marginLeft: 'auto',
+              borderRadius: 8,
+              paddingHorizontal: 15,
+              paddingVertical: 5,
+              gap: 5,
+            }}>
+            <View
+              style={{
+                width: 24,
+                height: 24,
+              }}>
+              <Image
+                source={require('../../assets/espocoin.png')}
+                style={{width: '100%', height: '100%', resizeMode: 'contain'}}
+              />
+            </View>
+            <View
+              style={{
+                height: ms(24),
+              }}>
+              <MyText
+                teko
+                style={{
+                  fontSize: ms(24),
+                  color: colors.text,
+                }}>
+                10
+              </MyText>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
